@@ -7,9 +7,11 @@
 //
 
 import Foundation
-import UKit
+import UIKit
+import Realm
 
-struct Player {
-    var name = ""
-    var age = 0
+class Player: RLMObject {
+    dynamic var name = ""
+    dynamic var age = 0
+    dynamic var height = "22"
 }

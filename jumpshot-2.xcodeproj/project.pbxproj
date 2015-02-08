@@ -14,6 +14,9 @@
 		3197E3F01A87D94B00F846A7 /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197E3EF1A87D94B00F846A7 /* PlayersViewController.swift */; };
 		3197E3F21A87D9A400F846A7 /* GamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197E3F11A87D9A400F846A7 /* GamesViewController.swift */; };
 		3197E3F41A87DBD100F846A7 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197E3F31A87DBD100F846A7 /* Player.swift */; };
+		3197E3F61A87F02C00F846A7 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3197E3F51A87F02C00F846A7 /* Realm.framework */; };
+		3197E3F81A87F07200F846A7 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3197E3F71A87F07200F846A7 /* libc++.dylib */; };
+		3197E3FA1A87F08500F846A7 /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197E3F91A87F08500F846A7 /* RLMSupport.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +41,9 @@
 		3197E3EF1A87D94B00F846A7 /* PlayersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersViewController.swift; sourceTree = "<group>"; };
 		3197E3F11A87D9A400F846A7 /* GamesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamesViewController.swift; sourceTree = "<group>"; };
 		3197E3F31A87DBD100F846A7 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		3197E3F51A87F02C00F846A7 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		3197E3F71A87F07200F846A7 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		3197E3F91A87F08500F846A7 /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +51,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3197E3F81A87F07200F846A7 /* libc++.dylib in Frameworks */,
+				3197E3F61A87F02C00F846A7 /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +69,9 @@
 		3197E3C11A87D8DB00F846A7 = {
 			isa = PBXGroup;
 			children = (
+				3197E3F91A87F08500F846A7 /* RLMSupport.swift */,
+				3197E3F71A87F07200F846A7 /* libc++.dylib */,
+				3197E3F51A87F02C00F846A7 /* Realm.framework */,
 				3197E3CC1A87D8DB00F846A7 /* jumpshot-2 */,
 				3197E3E21A87D8DB00F846A7 /* jumpshot-2Tests */,
 				3197E3CB1A87D8DB00F846A7 /* Products */,
@@ -216,6 +227,7 @@
 			files = (
 				3197E3F41A87DBD100F846A7 /* Player.swift in Sources */,
 				3197E3D01A87D8DB00F846A7 /* AppDelegate.swift in Sources */,
+				3197E3FA1A87F08500F846A7 /* RLMSupport.swift in Sources */,
 				3197E3F21A87D9A400F846A7 /* GamesViewController.swift in Sources */,
 				3197E3F01A87D94B00F846A7 /* PlayersViewController.swift in Sources */,
 			);
@@ -332,6 +344,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "jumpshot-2/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -342,6 +358,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "jumpshot-2/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -401,6 +421,7 @@
 				3197E3EB1A87D8DB00F846A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3197E3EC1A87D8DB00F846A7 /* Build configuration list for PBXNativeTarget "jumpshot-2Tests" */ = {
 			isa = XCConfigurationList;
@@ -409,6 +430,7 @@
 				3197E3EE1A87D8DB00F846A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
