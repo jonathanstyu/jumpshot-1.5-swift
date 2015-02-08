@@ -15,7 +15,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        var nav1 = UINavigationController()
+        var playersScreen = PlayersViewController()
+        nav1.viewControllers = [playersScreen]
+        
+        var nav2 = UINavigationController()
+        var gamesScreen = GamesViewController()
+        nav2.viewControllers = [gamesScreen]
+        
+        var tabs = UITabBarController()
+        tabs.viewControllers = [nav1, nav2]
+        
+        self.window!.rootViewController = tabs
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
 
