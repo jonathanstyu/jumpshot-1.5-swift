@@ -13,5 +13,6 @@ import Realm
 class Player: RLMObject {
     dynamic var name = ""
     dynamic var age = 0
-    dynamic var height = "22"
+    dynamic var height = ""
+    dynamic var playerStatLines = RLMArray(objectClassName: Statline.className())
 }

@@ -28,7 +28,7 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.playersTable.frame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.width, height: self.view.bounds.height)
         self.playersTable.delegate = self
         self.playersTable.dataSource = self
-        self.playersTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        self.playersTable.registerClass(PlayerTableViewCell.self, forCellReuseIdentifier: "Cell")
         view.addSubview(playersTable)
     }
     
@@ -41,10 +41,10 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: UITableViewCell = playersTable.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
+        var cell: PlayerTableViewCell = playersTable.dequeueReusableCellWithIdentifier("Cell") as! PlayerTableViewCell
         
-        let selectedPlayer = self.players.objectAtIndex(UInt(indexPath.row)) as Player
-        cell.textLabel?.text = selectedPlayer.name
+        let selectedPlayer = self.players.objectAtIndex(UInt(indexPath.row)) as! Player
+        cell.nameLabel?.text = selectedPlayer.name
         
         return cell
     }

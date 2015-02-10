@@ -74,6 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let newPlayer = Player()
                 newPlayer.name = playerName
                 newPlayer.age = 26
+                newPlayer.height = "5'9"
                 realm.addObject(newPlayer)
             }
             realm.commitWriteTransaction()

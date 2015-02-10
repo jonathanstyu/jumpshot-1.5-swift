@@ -17,6 +17,9 @@
 		3197E3F61A87F02C00F846A7 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3197E3F51A87F02C00F846A7 /* Realm.framework */; };
 		3197E3F81A87F07200F846A7 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3197E3F71A87F07200F846A7 /* libc++.dylib */; };
 		3197E3FA1A87F08500F846A7 /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197E3F91A87F08500F846A7 /* RLMSupport.swift */; };
+		31ABBE721A89C05F005A35B3 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABBE711A89C05F005A35B3 /* Game.swift */; };
+		31ABBE741A89C082005A35B3 /* Statline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABBE731A89C082005A35B3 /* Statline.swift */; };
+		31ABBE761A8A5E05005A35B3 /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABBE751A8A5E05005A35B3 /* PlayerTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,9 @@
 		3197E3F51A87F02C00F846A7 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		3197E3F71A87F07200F846A7 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		3197E3F91A87F08500F846A7 /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
+		31ABBE711A89C05F005A35B3 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		31ABBE731A89C082005A35B3 /* Statline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statline.swift; sourceTree = "<group>"; };
+		31ABBE751A8A5E05005A35B3 /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,8 +98,11 @@
 			children = (
 				3197E3CF1A87D8DB00F846A7 /* AppDelegate.swift */,
 				3197E3F31A87DBD100F846A7 /* Player.swift */,
+				31ABBE711A89C05F005A35B3 /* Game.swift */,
+				31ABBE731A89C082005A35B3 /* Statline.swift */,
 				3197E3F11A87D9A400F846A7 /* GamesViewController.swift */,
 				3197E3EF1A87D94B00F846A7 /* PlayersViewController.swift */,
+				31ABBE751A8A5E05005A35B3 /* PlayerTableViewCell.swift */,
 				3197E3D61A87D8DB00F846A7 /* Images.xcassets */,
 				3197E3D81A87D8DB00F846A7 /* LaunchScreen.xib */,
 				3197E3CD1A87D8DB00F846A7 /* Supporting Files */,
@@ -226,7 +235,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3197E3F41A87DBD100F846A7 /* Player.swift in Sources */,
+				31ABBE741A89C082005A35B3 /* Statline.swift in Sources */,
+				31ABBE721A89C05F005A35B3 /* Game.swift in Sources */,
 				3197E3D01A87D8DB00F846A7 /* AppDelegate.swift in Sources */,
+				31ABBE761A8A5E05005A35B3 /* PlayerTableViewCell.swift in Sources */,
 				3197E3FA1A87F08500F846A7 /* RLMSupport.swift in Sources */,
 				3197E3F21A87D9A400F846A7 /* GamesViewController.swift in Sources */,
 				3197E3F01A87D94B00F846A7 /* PlayersViewController.swift in Sources */,
