@@ -28,9 +28,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var gamesScreen = GamesViewController()
         nav2.viewControllers = [gamesScreen]
         nav2.tabBarItem = UITabBarItem(title: "Games", image: nil, tag: 2)
+
+        var nav3 = UINavigationController()
+        var newGameScreen = NewGameViewController()
+        nav3.viewControllers = [newGameScreen]
+        nav3.tabBarItem = UITabBarItem(title: "New Game", image: nil, tag: 2)
+
         
         var tabs = UITabBarController()
-        tabs.viewControllers = [nav1, nav2]
+        tabs.viewControllers = [nav1, nav3, nav2]
+        tabs.tabBar.barTintColor = UIColor.whiteColor()
         
         self.window!.rootViewController = tabs
         self.window?.makeKeyAndVisible()
