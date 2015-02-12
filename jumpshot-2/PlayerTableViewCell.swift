@@ -14,6 +14,10 @@ class PlayerTableViewCell: UITableViewCell {
     var ageLabel: UILabel!
     var heightLabel: UILabel!
     
+    var colorBar: UIView!
+    
+    var kMargin: CGFloat = 1.0/8.0
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -21,9 +25,14 @@ class PlayerTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+        colorBar = UIView(frame: CGRect(x: 0, y: self.contentView.bounds.height * (kMargin), width: 20.0, height: self.contentView.bounds.height * (1-kMargin)))
         
-        contentView.addSubview(nameLabel)
+        colorBar.backgroundColor = UIColor.blueColor()
+        
+        nameLabel = UILabel(frame: CGRect(x: self.contentView.bounds.width * (1.0/10.0), y: 0, width: self.contentView.bounds.width * (1.0/2.0), height: self.contentView.bounds.height * (1.0/2.0)))
+
+        self.contentView.addSubview(colorBar)
+        self.contentView.addSubview(nameLabel)
     }
     
 }

@@ -28,6 +28,7 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.playersTable.frame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.width, height: self.view.bounds.height)
         self.playersTable.delegate = self
         self.playersTable.dataSource = self
+        self.playersTable.rowHeight = 60.0
         self.playersTable.registerClass(PlayerTableViewCell.self, forCellReuseIdentifier: "Cell")
         view.addSubview(playersTable)
     }

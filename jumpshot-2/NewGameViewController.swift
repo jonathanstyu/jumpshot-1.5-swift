@@ -63,11 +63,26 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-        var team1action = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Team 1", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+        
+        let team1SelectClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
             println("Hello from \(indexPath.row)")
             tableView.setEditing(false, animated: true)
-        })
-        return [team1action]
+        }
+        
+        let team2SelectClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+            action.backgroundColor = UIColor.greenColor()
+            println("Hello from \(indexPath.row)")
+            tableView.setEditing(false, animated: true)
+        }
+        
+        var team1action = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Team 1", handler: team1SelectClosure)
+        
+        var team2action = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Team 2", handler: team2SelectClosure)
+        
+        team1action.backgroundColor = UIColor.greenColor()
+        team2action.backgroundColor = UIColor.blueColor()
+        
+        return [team1action, team2action]
     }
     
     
