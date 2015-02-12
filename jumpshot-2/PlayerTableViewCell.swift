@@ -13,6 +13,7 @@ class PlayerTableViewCell: UITableViewCell {
     var nameLabel: UILabel!
     var ageLabel: UILabel!
     var heightLabel: UILabel!
+    var pointsTotallabel: UILabel!
     
     var colorBar: UIView!
     
@@ -30,7 +31,9 @@ class PlayerTableViewCell: UITableViewCell {
         colorBar.backgroundColor = UIColor.blueColor()
         
         nameLabel = UILabel(frame: CGRect(x: self.contentView.bounds.width * (1.0/10.0), y: 0, width: self.contentView.bounds.width * (1.0/2.0), height: self.contentView.bounds.height * (1.0/2.0)))
-
+        pointsTotallabel = UILabel(frame: CGRect(x: self.contentView.bounds.width * (1.0/10.0), y: self.contentView.bounds.height - nameLabel.bounds.height, width: self.contentView.bounds.width * (1.0/2.0), height: self.contentView.bounds.height * (1.0/2.0)))
+        
+        self.contentView.addSubview(pointsTotallabel)
         self.contentView.addSubview(colorBar)
         self.contentView.addSubview(nameLabel)
     }

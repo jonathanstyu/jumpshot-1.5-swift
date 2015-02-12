@@ -21,6 +21,7 @@
 		31ABBE741A89C082005A35B3 /* Statline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABBE731A89C082005A35B3 /* Statline.swift */; };
 		31ABBE761A8A5E05005A35B3 /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABBE751A8A5E05005A35B3 /* PlayerTableViewCell.swift */; };
 		31ABBE781A8B0202005A35B3 /* NewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABBE771A8B0202005A35B3 /* NewGameViewController.swift */; };
+		31ABBE7A1A8D08FC005A35B3 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABBE791A8D08FC005A35B3 /* Factory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		31ABBE731A89C082005A35B3 /* Statline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statline.swift; sourceTree = "<group>"; };
 		31ABBE751A8A5E05005A35B3 /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
 		31ABBE771A8B0202005A35B3 /* NewGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameViewController.swift; sourceTree = "<group>"; };
+		31ABBE791A8D08FC005A35B3 /* Factory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				3197E3CF1A87D8DB00F846A7 /* AppDelegate.swift */,
+				31ABBE791A8D08FC005A35B3 /* Factory.swift */,
 				3197E3F31A87DBD100F846A7 /* Player.swift */,
 				31ABBE711A89C05F005A35B3 /* Game.swift */,
 				31ABBE731A89C082005A35B3 /* Statline.swift */,
@@ -241,6 +244,7 @@
 				31ABBE741A89C082005A35B3 /* Statline.swift in Sources */,
 				31ABBE781A8B0202005A35B3 /* NewGameViewController.swift in Sources */,
 				31ABBE721A89C05F005A35B3 /* Game.swift in Sources */,
+				31ABBE7A1A8D08FC005A35B3 /* Factory.swift in Sources */,
 				3197E3D01A87D8DB00F846A7 /* AppDelegate.swift in Sources */,
 				31ABBE761A8A5E05005A35B3 /* PlayerTableViewCell.swift in Sources */,
 				3197E3FA1A87F08500F846A7 /* RLMSupport.swift in Sources */,

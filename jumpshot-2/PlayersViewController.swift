@@ -46,6 +46,7 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let selectedPlayer = self.players.objectAtIndex(UInt(indexPath.row)) as! Player
         cell.nameLabel?.text = selectedPlayer.name
+        cell.pointsTotallabel?.text = String(selectedPlayer.sumStatistic("points")) + " tot points"
         
         return cell
     }

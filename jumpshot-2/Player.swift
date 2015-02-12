@@ -15,4 +15,25 @@ class Player: RLMObject {
     dynamic var age = 0
     dynamic var height = ""
     dynamic var playerStatLines = RLMArray(objectClassName: Statline.className())
+    
+    func sumStatistic(statistic: String) -> Int {
+        
+        var sum: Int = 0
+        
+        for var lineIndex = 0; lineIndex < Int(self.playerStatLines.count); ++lineIndex {
+            var selectedStatLine = self.playerStatLines.objectAtIndex(UInt(lineIndex)) as! Statline
+            
+            switch statistic {
+                case "points":
+                sum += selectedStatLine.points
+                case "rebounds":
+                sum += selectedStatLine.rebounds
+            default:
+                sum = 0
+            }
+        }
+        
+        return sum
+    }
+    
 }

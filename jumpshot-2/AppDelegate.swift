@@ -78,10 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if players.count == 0 {
             realm.beginWriteTransaction()
             for playerName in playerNames {
-                let newPlayer = Player()
-                newPlayer.name = playerName
-                newPlayer.age = 26
-                newPlayer.height = "5'9"
+                let newPlayer = Factory.createRandoPlayer(playerName)
                 realm.addObject(newPlayer)
             }
             realm.commitWriteTransaction()
