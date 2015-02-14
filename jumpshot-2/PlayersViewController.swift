@@ -20,6 +20,8 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         players = Player.allObjects()
+        self.title = "Available Players"
+        setupBar()
         setupPlayersTable()
     }
     
@@ -28,9 +30,14 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.playersTable.frame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.width, height: self.view.bounds.height)
         self.playersTable.delegate = self
         self.playersTable.dataSource = self
-        self.playersTable.rowHeight = 60.0
+        
         self.playersTable.registerClass(PlayerTableViewCell.self, forCellReuseIdentifier: "Cell")
         view.addSubview(playersTable)
+    }
+    
+    func setupBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addPlayer")
+        
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -47,8 +54,19 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
         let selectedPlayer = self.players.objectAtIndex(UInt(indexPath.row)) as! Player
         cell.nameLabel?.text = selectedPlayer.name
         cell.pointsTotallabel?.text = String(selectedPlayer.sumStatistic("points")) + " tot points"
+        cell.pointsAveragelabel?.text = String(stringInterpolationSegment: selectedPlayer.averageStatistic("points")) + " pts avg"
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 100.0
+    }
+    
+//    IBActions
+    
+    func addPlayer() {
+        println("Hello there")
     }
 
     

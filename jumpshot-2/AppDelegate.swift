@@ -22,12 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var nav1 = UINavigationController()
         var playersScreen = PlayersViewController()
         nav1.viewControllers = [playersScreen]
-        nav1.tabBarItem = UITabBarItem(title: "Players", image: nil, tag: 1)
+        nav1.tabBarItem = UITabBarItem(title: "Players", image: UIImage(named: "Jersey-Tab-Icon"), tag: 1)
         
         var nav2 = UINavigationController()
         var gamesScreen = GamesViewController()
         nav2.viewControllers = [gamesScreen]
-        nav2.tabBarItem = UITabBarItem(title: "Games", image: nil, tag: 2)
+        nav2.tabBarItem = UITabBarItem(title: "Games", image: UIImage(named: "Ball-Tab-Icon"), tag: 2)
 
         var nav3 = UINavigationController()
         var newGameScreen = NewGameViewController()

@@ -28,12 +28,24 @@ class Player: RLMObject {
                 sum += selectedStatLine.points
                 case "rebounds":
                 sum += selectedStatLine.rebounds
+                case "assists":
+                sum += selectedStatLine.assists
+                case "steals":
+                sum += selectedStatLine.steals
+                case "blocks":
+                sum += selectedStatLine.blocks
+                case "turnovers":
+                sum += selectedStatLine.turnovers
             default:
                 sum = 0
             }
         }
-        
         return sum
     }
+    
+    func averageStatistic(statistic: String) -> Double {
+        return Double(sumStatistic(statistic)) / Double(self.playerStatLines.count)
+    }
+    
     
 }

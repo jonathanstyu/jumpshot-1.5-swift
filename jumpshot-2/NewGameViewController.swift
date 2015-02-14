@@ -15,6 +15,7 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     var playersTable: UITableView!
     var players: RLMResults!
     var selectedPlayer: Player!
+    var teamBadge: UILabel!
     
     var startGameButton: UIBarButtonItem!
     
@@ -31,7 +32,7 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.playersTable.frame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.width, height: self.view.bounds.height)
         self.playersTable.delegate = self
         self.playersTable.dataSource = self
-        self.playersTable.registerClass(PlayerTableViewCell.self, forCellReuseIdentifier: "Cell")
+        self.playersTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         view.addSubview(playersTable)
     }
     
@@ -51,10 +52,10 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: PlayerTableViewCell = playersTable.dequeueReusableCellWithIdentifier("Cell") as! PlayerTableViewCell
+        var cell: UITableViewCell = playersTable.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
         
         let selectedPlayer = self.players.objectAtIndex(UInt(indexPath.row)) as! Player
-        cell.nameLabel?.text = selectedPlayer.name
+        cell.textLabel?.text = selectedPlayer.name
         
         return cell
     }
@@ -64,14 +65,38 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         
+        var teamBadge = UILabel()
+        teamBadge.textColor = UIColor.blackColor()
+        teamBadge.font = UIFont(name: "Lato-Regular", size: 16)
+        teamBadge.textAlignment = NSTextAlignment.Center
+        teamBadge.layer.cornerRadius = 4
+        teamBadge.clipsToBounds = true
+        teamBadge.frame = CGRectMake(0, 0, 50, 20)
+
+        
         let team1SelectClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
-            println("Hello from \(indexPath.row)")
+            
+            var selectedPlayer = players.objectAtIndex(UInt(indexPath.row)) as! Player
+            println("Hello from \(selectedPlayer.name)")
+            
+            tableView.cellForRowAtIndexPath(indexPath)?.accessoryView = nil
+            teamBadge.text = "1"
+            teamBadge.backgroundColor = UIColor.yellowColor()
+            tableView.cellForRowAtIndexPath(indexPath)?.accessoryView = teamBadge
+            
             tableView.setEditing(false, animated: true)
         }
         
         let team2SelectClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
-            action.backgroundColor = UIColor.greenColor()
-            println("Hello from \(indexPath.row)")
+            
+            var selectedPlayer = players.objectAtIndex(UInt(indexPath.row)) as! Player
+            println("Hello from \(selectedPlayer.name)")
+            
+            tableView.cellForRowAtIndexPath(indexPath)?.accessoryView = nil
+            teamBadge.text = "2"
+            teamBadge.backgroundColor = UIColor.blueColor()
+            tableView.cellForRowAtIndexPath(indexPath)?.accessoryView = teamBadge
+            
             tableView.setEditing(false, animated: true)
         }
         

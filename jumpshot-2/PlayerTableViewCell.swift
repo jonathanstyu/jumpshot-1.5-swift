@@ -14,6 +14,7 @@ class PlayerTableViewCell: UITableViewCell {
     var ageLabel: UILabel!
     var heightLabel: UILabel!
     var pointsTotallabel: UILabel!
+    var pointsAveragelabel: UILabel!
     
     var colorBar: UIView!
     
@@ -23,17 +24,27 @@ class PlayerTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        nameLabel.frame = CGRect(x: self.contentView.bounds.width * (1.0/10.0), y: 0, width: self.contentView.bounds.width * (1.0/2.0), height: self.contentView.bounds.height * (1.0/2.0))
+        pointsAveragelabel.frame = CGRect(x: self.contentView.bounds.width * (1.0/10.0), y: self.contentView.bounds.height - nameLabel.bounds.height, width: self.contentView.bounds.width * (1.0/4.0), height: self.contentView.bounds.height * (1.0/2.0))
+        pointsTotallabel.frame = CGRect(x: self.contentView.bounds.width * (1.0/10.0) + pointsTotallabel.bounds.width, y: self.contentView.bounds.height - nameLabel.bounds.height, width: self.contentView.bounds.width * (1.0/4.0), height: self.contentView.bounds.height * (1.0/2.0))
+    }
+    
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        colorBar = UIView(frame: CGRect(x: 0, y: self.contentView.bounds.height * (kMargin), width: 20.0, height: self.contentView.bounds.height * (1-kMargin)))
+        colorBar = UIView(frame: CGRect(x: 0, y: self.contentView.bounds.height * (kMargin), width: 20.0, height: self.contentView.bounds.height * (1 - kMargin) ))
         
         colorBar.backgroundColor = UIColor.blueColor()
         
-        nameLabel = UILabel(frame: CGRect(x: self.contentView.bounds.width * (1.0/10.0), y: 0, width: self.contentView.bounds.width * (1.0/2.0), height: self.contentView.bounds.height * (1.0/2.0)))
-        pointsTotallabel = UILabel(frame: CGRect(x: self.contentView.bounds.width * (1.0/10.0), y: self.contentView.bounds.height - nameLabel.bounds.height, width: self.contentView.bounds.width * (1.0/2.0), height: self.contentView.bounds.height * (1.0/2.0)))
+        pointsTotallabel = UILabel()
+        pointsAveragelabel = UILabel()
+        nameLabel = UILabel()
         
         self.contentView.addSubview(pointsTotallabel)
+        self.contentView.addSubview(pointsAveragelabel)
         self.contentView.addSubview(colorBar)
         self.contentView.addSubview(nameLabel)
     }
