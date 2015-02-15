@@ -11,11 +11,11 @@ import UIKit
 import Realm
 
 class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    var playersTable: UITableView!
+
     var players: RLMResults!
     var selectedPlayer: Player!
-    var teamBadge: UILabel!
+    
+    var playersTable: UITableView!
     
     var startGameButton: UIBarButtonItem!
     
@@ -23,16 +23,20 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         players = Player.allObjects()
+        self.title = "New Game"
+        
         setupPlayersTable()
         setupUIElements()
     }
     
     func setupPlayersTable() {
+        
         self.playersTable = UITableView()
-        self.playersTable.frame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.y, width: self.view.bounds.width, height: self.view.bounds.height)
+        self.playersTable.frame = CGRect(x: self.view.bounds.origin.x, y: self.view.bounds.origin.x, width: self.view.bounds.width, height: self.view.bounds.height)
         self.playersTable.delegate = self
         self.playersTable.dataSource = self
         self.playersTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
         view.addSubview(playersTable)
     }
     
