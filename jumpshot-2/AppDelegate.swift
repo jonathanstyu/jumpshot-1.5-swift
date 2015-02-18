@@ -39,6 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabs.viewControllers = [nav1, nav3, nav2]
         tabs.tabBar.barTintColor = UIColor.whiteColor()
         
+        UINavigationBar.appearance().barStyle = UIBarStyle.Black
+        
         self.window!.rootViewController = tabs
         self.window?.makeKeyAndVisible()
         

@@ -100,8 +100,8 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
         let selectedPlayer = self.players.objectAtIndex(UInt(indexPath.row)) as! Player
         cell.nameLabel?.text = selectedPlayer.name
         
-        cell.pointsAveragelabel?.text = String(stringInterpolationSegment: selectedPlayer.averageStatistic("points"))
-        cell.reboundsAverageLabel?.text = String(stringInterpolationSegment: selectedPlayer.averageStatistic("rebounds"))
+        cell.pointsAveragelabel?.text = String(format: "%.1f", selectedPlayer.averageStatistic("points"))
+        cell.reboundsAverageLabel?.text = String(format: "%.1f", selectedPlayer.averageStatistic("rebounds"))
         
         return cell
     }
@@ -109,7 +109,7 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 75.0
     }
-    
+        
 //    IBActions
     
     func addPlayer() {
