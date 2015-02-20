@@ -32,6 +32,9 @@ class Factory {
     
     class func createGame(team1: [Player], team2: [Player]) -> Game {
         let newGame = Game()
+        newGame.datePlayed = NSDate(fromString: "Fri, 09 Sep 2011 15:26:08 +0200", format: .RSS)
+
+        return newGame
     }
     
     class func createRandoPlayer(name: String) -> Player {
