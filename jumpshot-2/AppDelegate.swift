@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.rootViewController = tabs
         self.window?.makeKeyAndVisible()
         
-        createTestData()
+        Factory.createTestData()
         
         return true
     }
@@ -69,22 +69,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-    
-    func createTestData() {
-        
-        let players = Player.allObjects()
-        let realm = RLMRealm.defaultRealm()
-        let playerNames = ["jenny", "audrey", "libby", "daniel"]
-        
-        if players.count == 0 {
-            realm.beginWriteTransaction()
-            for playerName in playerNames {
-                let newPlayer = Factory.createRandoPlayer(playerName)
-                realm.addObject(newPlayer)
-            }
-            realm.commitWriteTransaction()
-        }
     }
 
 

@@ -15,6 +15,8 @@ class PlayerTableViewCell: UITableViewCell {
     var heightLabel: UILabel!
     var reboundsAverageLabel: UILabel!
     var pointsAveragelabel: UILabel!
+    var assistsAveragelabel: UILabel!
+    var blocksAveragelabel: UILabel!
     
     var headerBar: UIView!
     var bottomBar: UIView!
@@ -27,14 +29,16 @@ class PlayerTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        nameLabel.frame = CGRect(x: self.contentView.bounds.width * (1.0/12.0), y: 0, width: self.contentView.bounds.width * (1.0/2.0), height: self.contentView.bounds.height * (1.0/2.0))
         
-        headerBar.frame = CGRect(x: 0, y: 0, width: self.contentView.bounds.width, height: self.contentView.bounds.height * (0.5))
-        bottomBar.frame = CGRect(x: 0, y: headerBar.frame.height, width: self.contentView.bounds.width, height: self.contentView.bounds.height * (0.5))
+        headerBar.frame = CGRect(x: 0, y: 0, width: self.contentView.bounds.width, height: self.contentView.bounds.height * (0.7))
+        bottomBar.frame = CGRect(x: 0, y: headerBar.frame.height, width: self.contentView.bounds.width, height: self.contentView.bounds.height * (0.3))
+        
+        nameLabel.frame = CGRect(x: self.headerBar.bounds.width * (1.0/12.0), y: 0, width: self.headerBar.bounds.width, height: self.headerBar.bounds.height)
         
         pointsAveragelabel.frame = CGRect(x: 0, y: 0, width: self.bottomBar.bounds.width * (1.0/4.0), height: self.bottomBar.bounds.height)
         reboundsAverageLabel.frame = CGRect(x: self.pointsAveragelabel.bounds.width, y: 0, width: self.bottomBar.bounds.width * (1.0/4.0), height: self.bottomBar.bounds.height)
-        
+        assistsAveragelabel.frame = CGRect(x: self.pointsAveragelabel.bounds.width + self.reboundsAverageLabel.bounds.width, y: 0, width: self.bottomBar.bounds.width * (1.0/4.0), height: self.bottomBar.bounds.height)
+        blocksAveragelabel.frame = CGRect(x: self.pointsAveragelabel.bounds.width + self.reboundsAverageLabel.bounds.width + self.assistsAveragelabel.bounds.width, y: 0, width: self.bottomBar.bounds.width * (1.0/4.0), height: self.bottomBar.bounds.height)
     }
     
     
@@ -46,6 +50,8 @@ class PlayerTableViewCell: UITableViewCell {
         
         pointsAveragelabel = UILabel()
         reboundsAverageLabel = UILabel()
+        blocksAveragelabel = UILabel()
+        assistsAveragelabel = UILabel()
         nameLabel = UILabel()
         
         bottomBar.backgroundColor = UIColor.grayColor()
@@ -60,11 +66,22 @@ class PlayerTableViewCell: UITableViewCell {
         reboundsAverageLabel.textAlignment = NSTextAlignment.Center
         reboundsAverageLabel.textColor = UIColor.whiteColor()
         
+        assistsAveragelabel.font = UIFont(name: "ArialRoundedMTBold", size: 12.0)
+        assistsAveragelabel.textAlignment = NSTextAlignment.Center
+        assistsAveragelabel.textColor = UIColor.whiteColor()
+        
+        blocksAveragelabel.font = UIFont(name: "ArialRoundedMTBold", size: 12.0)
+        blocksAveragelabel.textAlignment = NSTextAlignment.Center
+        blocksAveragelabel.textColor = UIColor.whiteColor()
+        
         self.contentView.addSubview(headerBar)
         self.contentView.addSubview(bottomBar)
         
         self.bottomBar.addSubview(reboundsAverageLabel)
         self.bottomBar.addSubview(pointsAveragelabel)
+        self.bottomBar.addSubview(assistsAveragelabel)
+        self.bottomBar.addSubview(blocksAveragelabel)
+        
         self.headerBar.addSubview(nameLabel)
     }
     

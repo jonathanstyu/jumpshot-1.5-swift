@@ -102,6 +102,8 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         cell.pointsAveragelabel?.text = String(format: "%.1f", selectedPlayer.averageStatistic("points"))
         cell.reboundsAverageLabel?.text = String(format: "%.1f", selectedPlayer.averageStatistic("rebounds"))
+        cell.assistsAveragelabel?.text = String(format: "%.1f", selectedPlayer.averageStatistic("assists"))
+        cell.blocksAveragelabel?.text = String(format: "%.1f", selectedPlayer.averageStatistic("blocks"))
         
         return cell
     }

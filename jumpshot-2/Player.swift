@@ -15,6 +15,7 @@ class Player: RLMObject {
     dynamic var age = 0
     dynamic var height = ""
     dynamic var playerStatLines = RLMArray(objectClassName: Statline.className())
+    dynamic var id = Int(arc4random_uniform(UInt32(999999)))
     
     func sumStatistic(statistic: String) -> Int {
         
@@ -44,7 +45,11 @@ class Player: RLMObject {
     }
     
     func averageStatistic(statistic: String) -> Double {
-        return Double(sumStatistic(statistic)) / Double(self.playerStatLines.count)
+        if self.playerStatLines.count > 0 {
+            return Double(sumStatistic(statistic)) / Double(self.playerStatLines.count)
+        } else {
+            return 0.0
+        }
     }
     
     

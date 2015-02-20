@@ -10,6 +10,8 @@ import Foundation
 import Realm
 
 class Statline: RLMObject {
+    dynamic var id = Int(arc4random_uniform(UInt32(999999)))
+    
     dynamic var points = 0
     dynamic var rebounds = 0
     dynamic var assists = 0
@@ -25,4 +27,5 @@ class Statline: RLMObject {
     dynamic var threeFieldGoalsMissed = 0
     
     dynamic var owner: Player?
+    dynamic var game: Game?
 }

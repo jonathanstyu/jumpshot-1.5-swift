@@ -8,8 +8,31 @@
 
 import Foundation
 import UIKit
+import Realm
 
 class Factory {
+    
+    class func createTestData() {
+        
+        let realm = RLMRealm.defaultRealm()
+        let players = Player.allObjects()
+        let games = Game.allObjects()
+        
+        let playerNames = ["jenny", "audrey", "libby", "daniel", "sydney"]
+        
+        if players.count == 0 {
+            realm.beginWriteTransaction()
+            for playerName in playerNames {
+                let newPlayer = Factory.createRandoPlayer(playerName)
+                realm.addObject(newPlayer)
+            }
+            realm.commitWriteTransaction()
+        }
+    }
+    
+    class func createGame(team1: [Player], team2: [Player]) -> Game {
+        let newGame = Game()
+    }
     
     class func createRandoPlayer(name: String) -> Player {
         let newPlayer = Player()
@@ -19,21 +42,24 @@ class Factory {
         newPlayer.height = "\(Int(arc4random_uniform(UInt32(2)))+5)'\(Int(arc4random_uniform(UInt32(2)))+9)"
         
         
-        var numberOfGamesPlayed = Int(arc4random_uniform(UInt32(7)))
-        
-        for var statNumber = 0; statNumber < numberOfGamesPlayed; ++statNumber {
-            let line = Statline()
-            
-            line.points = Int(arc4random_uniform(UInt32(56)))
-            line.rebounds = Int(arc4random_uniform(UInt32(20)))
-            line.assists = Int(arc4random_uniform(UInt32(20)))
-            line.steals = Int(arc4random_uniform(UInt32(10)))
-            line.blocks = Int(arc4random_uniform(UInt32(10)))
-            
-            newPlayer.playerStatLines.addObject(line)
-        }
+//        var numberOfGamesPlayed = Int(arc4random_uniform(UInt32(7))) + 1
+//        
+//        for var statNumber = 0; statNumber < numberOfGamesPlayed; ++statNumber {
+//            let line = Statline()
+//            
+//            line.points = Int(arc4random_uniform(UInt32(56)))
+//            line.rebounds = Int(arc4random_uniform(UInt32(20)))
+//            line.assists = Int(arc4random_uniform(UInt32(20)))
+//            line.steals = Int(arc4random_uniform(UInt32(10)))
+//            line.blocks = Int(arc4random_uniform(UInt32(10)))
+//            line.turnovers = Int(arc4random_uniform(UInt32(10)))
+//            
+//            newPlayer.playerStatLines.addObject(line)
+//            line.owner = newPlayer
+//        }
         
         return newPlayer
     }
+    
     
 }
