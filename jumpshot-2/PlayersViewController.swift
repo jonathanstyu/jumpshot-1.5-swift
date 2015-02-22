@@ -98,7 +98,7 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
         var cell: PlayerTableViewCell = playersTable.dequeueReusableCellWithIdentifier("Cell") as! PlayerTableViewCell
         
         let selectedPlayer = self.players.objectAtIndex(UInt(indexPath.row)) as! Player
-        cell.nameLabel?.text = selectedPlayer.name
+        cell.nameLabel?.text = selectedPlayer.name.uppercaseString
         
         cell.pointsAveragelabel?.text = String(format: "%.1f", selectedPlayer.averageStatistic("points"))
         cell.reboundsAverageLabel?.text = String(format: "%.1f", selectedPlayer.averageStatistic("rebounds"))
@@ -109,9 +109,16 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 75.0
+        return 70.0
     }
-        
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let vc: PlayerProfileVC = PlayerProfileVC()
+        navigationController?.presentViewController(vc, animated: true, completion: nil)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    
 //    IBActions
     
     func addPlayer() {

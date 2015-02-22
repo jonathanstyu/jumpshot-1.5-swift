@@ -24,6 +24,9 @@ class Player: RLMObject {
         for var lineIndex = 0; lineIndex < Int(self.playerStatLines.count); ++lineIndex {
             var selectedStatLine = self.playerStatLines.objectAtIndex(UInt(lineIndex)) as! Statline
             
+//            println(sum)
+//            println(selectedStatLine.statCall("points"))
+            
             switch statistic {
                 case "points":
                 sum += selectedStatLine.points

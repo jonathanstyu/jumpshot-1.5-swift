@@ -18,7 +18,7 @@ class Factory {
         let players = Player.allObjects()
         let games = Game.allObjects()
         
-        let playerNames = ["jenny", "audrey", "libby", "daniel", "sydney"]
+        let playerNames = ["jenny", "audrey", "libby", "daniel", "sydney", "Luis"]
         
         if players.count == 0 {
             realm.beginWriteTransaction()
@@ -28,13 +28,56 @@ class Factory {
             }
             realm.commitWriteTransaction()
         }
+        
+        if games.count == 0 {
+            for var i = 0; i < 3; ++i {
+                let newGame = Factory.createGame(team1: [players.objectAtIndex(0) as! Player], team2: [players.objectAtIndex(1) as! Player])
+            }
+        }
     }
     
-    class func createGame(team1: [Player], team2: [Player]) -> Game {
+    class func createGame(team1 t1: [Player], team2 t2: [Player]) -> Game {
         let newGame = Game()
-        newGame.datePlayed = NSDate(fromString: "Fri, 09 Sep 2011 15:26:08 +0200", format: .RSS)
-
+        let realm = RLMRealm.defaultRealm()
+        
+        realm.beginWriteTransaction()
+        
+        for player in t1 {
+            let newStatline = Factory.createRandoStatline()
+            newStatline.owner = player
+            newStatline.game = newGame
+            player.playerStatLines.addObject(newStatline)
+            newGame.team1_players.addObject(newStatline)
+            
+            realm.addObject(newStatline)
+        }
+        
+        for player in t2 {
+            let newStatline = Factory.createRandoStatline()
+            newStatline.owner = player
+            newStatline.game = newGame
+            player.playerStatLines.addObject(newStatline)
+            newGame.team2_players.addObject(newStatline)
+            
+            realm.addObject(newStatline)
+        }
+        realm.addObject(newGame)
+        realm.commitWriteTransaction()
+        
         return newGame
+    }
+    
+    class func createRandoStatline() -> Statline {
+        let line = Statline()
+
+        line.points = Int(arc4random_uniform(UInt32(30)))
+        line.rebounds = Int(arc4random_uniform(UInt32(15)))
+        line.assists = Int(arc4random_uniform(UInt32(15)))
+        line.steals = Int(arc4random_uniform(UInt32(10)))
+        line.blocks = Int(arc4random_uniform(UInt32(10)))
+        line.turnovers = Int(arc4random_uniform(UInt32(10)))
+        
+        return line
     }
     
     class func createRandoPlayer(name: String) -> Player {
@@ -43,23 +86,6 @@ class Factory {
         newPlayer.name = name
         newPlayer.age = Int(arc4random_uniform(UInt32(56)))
         newPlayer.height = "\(Int(arc4random_uniform(UInt32(2)))+5)'\(Int(arc4random_uniform(UInt32(2)))+9)"
-        
-        
-//        var numberOfGamesPlayed = Int(arc4random_uniform(UInt32(7))) + 1
-//        
-//        for var statNumber = 0; statNumber < numberOfGamesPlayed; ++statNumber {
-//            let line = Statline()
-//            
-//            line.points = Int(arc4random_uniform(UInt32(56)))
-//            line.rebounds = Int(arc4random_uniform(UInt32(20)))
-//            line.assists = Int(arc4random_uniform(UInt32(20)))
-//            line.steals = Int(arc4random_uniform(UInt32(10)))
-//            line.blocks = Int(arc4random_uniform(UInt32(10)))
-//            line.turnovers = Int(arc4random_uniform(UInt32(10)))
-//            
-//            newPlayer.playerStatLines.addObject(line)
-//            line.owner = newPlayer
-//        }
         
         return newPlayer
     }

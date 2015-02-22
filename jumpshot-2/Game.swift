@@ -10,10 +10,14 @@ import Foundation
 import Realm
 
 class Game: RLMObject {
-    dynamic var datePlayed = NSDate(timeIntervalSince1970: 1)
-    dynamic var game_id = Int(arc4random_uniform(UInt32(999999)))
+    dynamic var datePlayed = NSDate()
+    dynamic var id = Int(arc4random_uniform(UInt32(999999)))
     
-    dynamic var team1_players = RLMArray(objectClassName: "Player")
-    dynamic var team2_players = RLMArray(objectClassName: "Player")
+    dynamic var team1_players = RLMArray(objectClassName: "Statline")
+    dynamic var team2_players = RLMArray(objectClassName: "Statline")
+    
+//    func tallySums(teamNumber tn: Int, requestedStat rs: String) -> Int {
+//        
+//    }
     
 }

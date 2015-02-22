@@ -19,10 +19,13 @@
 		31ABBE761A8A5E05005A35B3 /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABBE751A8A5E05005A35B3 /* PlayerTableViewCell.swift */; };
 		31ABBE781A8B0202005A35B3 /* NewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABBE771A8B0202005A35B3 /* NewGameViewController.swift */; };
 		31ABBE7A1A8D08FC005A35B3 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABBE791A8D08FC005A35B3 /* Factory.swift */; };
+		31CBF6381A9A6BBF0086C4C9 /* PlayerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CBF6371A9A6BBF0086C4C9 /* PlayerProfileViewController.swift */; };
 		31EA476F1A97E786000C4D89 /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA476E1A97E786000C4D89 /* RLMSupport.swift */; };
 		31EA47711A97E791000C4D89 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31EA47701A97E791000C4D89 /* Realm.framework */; };
 		31EA47731A97E7EC000C4D89 /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 31EA47721A97E7EC000C4D89 /* libc++.1.dylib */; };
 		31EA47771A97F552000C4D89 /* AF+Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA47761A97F552000C4D89 /* AF+Date+Extension.swift */; };
+		31EA477D1A993A86000C4D89 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 31EA477C1A993A86000C4D89 /* Podfile */; };
+		31EA477F1A994DFB000C4D89 /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA477E1A994DFB000C4D89 /* GameTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,10 +55,13 @@
 		31ABBE751A8A5E05005A35B3 /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
 		31ABBE771A8B0202005A35B3 /* NewGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameViewController.swift; sourceTree = "<group>"; };
 		31ABBE791A8D08FC005A35B3 /* Factory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		31CBF6371A9A6BBF0086C4C9 /* PlayerProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerProfileViewController.swift; sourceTree = "<group>"; };
 		31EA476E1A97E786000C4D89 /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
 		31EA47701A97E791000C4D89 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		31EA47721A97E7EC000C4D89 /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "usr/lib/libc++.1.dylib"; sourceTree = SDKROOT; };
 		31EA47761A97F552000C4D89 /* AF+Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AF+Date+Extension.swift"; sourceTree = "<group>"; };
+		31EA477C1A993A86000C4D89 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		31EA477E1A994DFB000C4D89 /* GameTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,7 @@
 		3197E3C11A87D8DB00F846A7 = {
 			isa = PBXGroup;
 			children = (
+				31EA477C1A993A86000C4D89 /* Podfile */,
 				31EA47721A97E7EC000C4D89 /* libc++.1.dylib */,
 				31EA47701A97E791000C4D89 /* Realm.framework */,
 				31EA476E1A97E786000C4D89 /* RLMSupport.swift */,
@@ -112,6 +119,8 @@
 				3197E3EF1A87D94B00F846A7 /* PlayersViewController.swift */,
 				31ABBE771A8B0202005A35B3 /* NewGameViewController.swift */,
 				31ABBE751A8A5E05005A35B3 /* PlayerTableViewCell.swift */,
+				31CBF6371A9A6BBF0086C4C9 /* PlayerProfileViewController.swift */,
+				31EA477E1A994DFB000C4D89 /* GameTableViewCell.swift */,
 				3197E3D61A87D8DB00F846A7 /* Images.xcassets */,
 				3197E3D81A87D8DB00F846A7 /* LaunchScreen.xib */,
 				3197E3CD1A87D8DB00F846A7 /* Supporting Files */,
@@ -224,6 +233,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31EA477D1A993A86000C4D89 /* Podfile in Resources */,
 				3197E3DA1A87D8DB00F846A7 /* LaunchScreen.xib in Resources */,
 				3197E3D71A87D8DB00F846A7 /* Images.xcassets in Resources */,
 			);
@@ -251,9 +261,11 @@
 				31ABBE7A1A8D08FC005A35B3 /* Factory.swift in Sources */,
 				3197E3D01A87D8DB00F846A7 /* AppDelegate.swift in Sources */,
 				31ABBE761A8A5E05005A35B3 /* PlayerTableViewCell.swift in Sources */,
+				31CBF6381A9A6BBF0086C4C9 /* PlayerProfileViewController.swift in Sources */,
 				31EA476F1A97E786000C4D89 /* RLMSupport.swift in Sources */,
 				3197E3F21A87D9A400F846A7 /* GamesViewController.swift in Sources */,
 				3197E3F01A87D94B00F846A7 /* PlayersViewController.swift in Sources */,
+				31EA477F1A994DFB000C4D89 /* GameTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

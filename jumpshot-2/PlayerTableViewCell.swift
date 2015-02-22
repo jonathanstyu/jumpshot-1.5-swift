@@ -33,7 +33,7 @@ class PlayerTableViewCell: UITableViewCell {
         headerBar.frame = CGRect(x: 0, y: 0, width: self.contentView.bounds.width, height: self.contentView.bounds.height * (0.7))
         bottomBar.frame = CGRect(x: 0, y: headerBar.frame.height, width: self.contentView.bounds.width, height: self.contentView.bounds.height * (0.3))
         
-        nameLabel.frame = CGRect(x: self.headerBar.bounds.width * (1.0/12.0), y: 0, width: self.headerBar.bounds.width, height: self.headerBar.bounds.height)
+        nameLabel.frame = CGRect(x: self.headerBar.bounds.width * (1.0/15.0), y: 0, width: self.headerBar.bounds.width, height: self.headerBar.bounds.height * (0.75))
         
         pointsAveragelabel.frame = CGRect(x: 0, y: 0, width: self.bottomBar.bounds.width * (1.0/4.0), height: self.bottomBar.bounds.height)
         reboundsAverageLabel.frame = CGRect(x: self.pointsAveragelabel.bounds.width, y: 0, width: self.bottomBar.bounds.width * (1.0/4.0), height: self.bottomBar.bounds.height)
@@ -56,7 +56,7 @@ class PlayerTableViewCell: UITableViewCell {
         
         bottomBar.backgroundColor = UIColor.grayColor()
         
-        nameLabel.font = UIFont(name: "ArialRoundedMTBold", size: 16.0)
+        nameLabel.font = UIFont(name: "ArialRoundedMTBold", size: 14.0)
         
         pointsAveragelabel.font = UIFont(name: "ArialRoundedMTBold", size: 12.0)
         pointsAveragelabel.textAlignment = NSTextAlignment.Center
