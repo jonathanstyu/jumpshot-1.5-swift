@@ -12,28 +12,25 @@ import Realm
 
 class PlayerProfileVC: UIViewController {
     var nameLabel: UILabel!
+    var selectedPlayer: Player!
     
     var backButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.whiteColor()
+        UINavigationBar.appearance().barStyle = UIBarStyle.Default
+        navigationItem.title = selectedPlayer.name.uppercaseString
         setupViews()
     }
     
     func setupViews() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "dismissModal")
+        
         nameLabel = UILabel()
-        nameLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 59)
-        nameLabel.text = "Hello World"
+        nameLabel.frame = CGRect(x: 0, y: self.navigationController!.navigationBar.frame.height, width: 100, height: 59)
+        nameLabel.text = selectedPlayer.name
         
-        backButton = UIButton()
-//        backButton.center = CGPoint(x: view.bounds.width * 0.5, y: view.bounds.height * 0.5)
-        backButton.frame = CGRect(x: 0, y: 100, width: 100, height: 25)
-        backButton.setTitle("Dismiss", forState: UIControlState.Normal)
-        backButton.backgroundColor = UIColor.blueColor()
-        backButton.addTarget(self, action: "dismissModal", forControlEvents: UIControlEvents.TouchUpInside)
-        
-        view.addSubview(backButton)
         view.addSubview(nameLabel)
     }
     

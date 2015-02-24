@@ -113,8 +113,13 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let selectedPlayer = self.players.objectAtIndex(UInt(indexPath.row)) as! Player
+        let navPlayer = UINavigationController()
         let vc: PlayerProfileVC = PlayerProfileVC()
-        navigationController?.presentViewController(vc, animated: true, completion: nil)
+        
+        vc.selectedPlayer = selectedPlayer
+        navPlayer.viewControllers = [vc]
+        navigationController?.presentViewController(navPlayer, animated: true, completion: nil)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
