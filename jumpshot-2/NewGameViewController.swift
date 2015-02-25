@@ -20,10 +20,15 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     var startGameButton: UIBarButtonItem!
     
     var containerView: UIView!
+    var team1View: UIView!
+    var team2View: UIView!
     
     var gameTitleLabel: UILabel!
     var team1Label: UILabel!
     var team2Label: UILabel!
+    
+    var team1: [Player]!
+    var team2: [Player]!
     
     let kMargin: CGFloat = (1.0/12.0)
     
@@ -31,6 +36,9 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         players = Player.allObjects()
         self.title = "New Game"
+        
+        self.team1 = []
+        self.team2 = []
         
         setupUIElements()
     }
@@ -43,10 +51,10 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         self.containerView = UIView()
         self.containerView.frame = CGRect(x: 0, y: self.navigationController!.navigationBar.frame.height, width: self.view.bounds.width, height: (visibleHeight * 0.4))
-        self.containerView.backgroundColor = UIColor.whiteColor()
+        self.containerView.backgroundColor = UIColor.darkGrayColor()
         
         self.gameTitleLabel = UILabel()
-        self.gameTitleLabel.frame = CGRect(x: containerView.bounds.height * kMargin, y: containerView.bounds.height * (0.1), width: containerView.bounds.width - (containerView.bounds.height * 2 * kMargin), height: containerView.bounds.height * 0.2)
+        self.gameTitleLabel.frame = CGRect(x: containerView.bounds.height * kMargin, y: containerView.bounds.height * (0.1), width: containerView.bounds.width - (containerView.bounds.height * 2 * kMargin), height: containerView.bounds.height * 0.15)
         self.gameTitleLabel.font = UIFont(name: "Futura-CondensedMedium", size: 25.0)
         self.gameTitleLabel.textAlignment = NSTextAlignment.Center
         self.gameTitleLabel.text = "Adding Players ..."
@@ -64,7 +72,7 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.team2Label.text = "Team 2"
         
         self.playersTable = UITableView()
-        self.playersTable.frame = CGRect(x: self.view.bounds.origin.x, y: self.navigationController!.navigationBar.frame.height + self.containerView.frame.height, width: self.view.bounds.width, height: self.view.bounds.height)
+        self.playersTable.frame = CGRect(x: self.view.bounds.origin.x, y: self.containerView.bounds.origin.y + self.containerView.frame.height, width: self.view.bounds.width, height: self.view.bounds.height)
         self.playersTable.delegate = self
         self.playersTable.dataSource = self
         self.playersTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -92,6 +100,7 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let selectedPlayer = self.players.objectAtIndex(UInt(indexPath.row)) as! Player
         cell.textLabel?.text = selectedPlayer.name
+        cell.detailTextLabel?.text = "AGE: \(selectedPlayer.age) HEIGHT: \(selectedPlayer.height)"
         
         return cell
     }
@@ -113,11 +122,13 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         let team1SelectClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
             
             var selectedPlayer = players.objectAtIndex(UInt(indexPath.row)) as! Player
-            println("Hello from \(selectedPlayer.name)")
+            self.team1.append(selectedPlayer)
+            println(self.team1.count)
             
             tableView.cellForRowAtIndexPath(indexPath)?.accessoryView = nil
             teamBadge.text = "1"
-            teamBadge.backgroundColor = UIColor.yellowColor()
+            teamBadge.backgroundColor = UIColor.darkGrayColor()
+            teamBadge.textColor = UIColor.whiteColor()
             tableView.cellForRowAtIndexPath(indexPath)?.accessoryView = teamBadge
             
             tableView.setEditing(false, animated: true)
@@ -126,11 +137,14 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         let team2SelectClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
             
             var selectedPlayer = players.objectAtIndex(UInt(indexPath.row)) as! Player
-            println("Hello from \(selectedPlayer.name)")
+            self.team2.append(selectedPlayer)
+            println(tableView.cellForRowAtIndexPath(indexPath)?.accessoryView)
+            println(self.team2.count)
             
             tableView.cellForRowAtIndexPath(indexPath)?.accessoryView = nil
             teamBadge.text = "2"
             teamBadge.backgroundColor = UIColor.blueColor()
+            teamBadge.textColor = UIColor.whiteColor()
             tableView.cellForRowAtIndexPath(indexPath)?.accessoryView = teamBadge
             
             tableView.setEditing(false, animated: true)
@@ -139,9 +153,7 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         let removeSelectClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
             
             var selectedPlayer = players.objectAtIndex(UInt(indexPath.row)) as! Player
-            println("\(selectedPlayer.name) to remove")
             
-            tableView.cellForRowAtIndexPath(indexPath)?.accessoryView = nil
             tableView.cellForRowAtIndexPath(indexPath)?.accessoryView = nil
             
             tableView.setEditing(false, animated: true)
@@ -153,11 +165,22 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         var removeAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Clear", handler: removeSelectClosure)
         
-        team1action.backgroundColor = UIColor.greenColor()
+        team1action.backgroundColor = UIColor.darkGrayColor()
         team2action.backgroundColor = UIColor.blueColor()
         removeAction.backgroundColor = UIColor.redColor()
         
-        return [team1action, team2action, removeAction]
+        if tableView.cellForRowAtIndexPath(indexPath)?.accessoryView == nil {
+            return [team1action, team2action]
+        } else {
+            var accessory = tableView.cellForRowAtIndexPath(indexPath)?.accessoryView as! UILabel
+            
+            if accessory.text == "2" {
+                return [team1action, removeAction]
+            } else {
+                return [team2action, removeAction]
+            }
+        }
+        
     }
     
     
