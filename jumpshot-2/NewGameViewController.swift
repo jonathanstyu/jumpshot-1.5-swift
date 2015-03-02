@@ -30,6 +30,8 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     var team1: [Player]!
     var team2: [Player]!
     
+    var gameToPlay: Game!
+    
     let kMargin: CGFloat = (1.0/12.0)
     
     override func viewDidLoad() {
@@ -39,6 +41,8 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         self.team1 = []
         self.team2 = []
+        
+        gameToPlay = Game()
         
         setupUIElements()
     }
@@ -138,7 +142,6 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             var selectedPlayer = players.objectAtIndex(UInt(indexPath.row)) as! Player
             self.team2.append(selectedPlayer)
-            println(tableView.cellForRowAtIndexPath(indexPath)?.accessoryView)
             println(self.team2.count)
             
             tableView.cellForRowAtIndexPath(indexPath)?.accessoryView = nil
@@ -169,6 +172,7 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         team2action.backgroundColor = UIColor.blueColor()
         removeAction.backgroundColor = UIColor.redColor()
         
+//        Check accessory. If there is one then go check its text. 
         if tableView.cellForRowAtIndexPath(indexPath)?.accessoryView == nil {
             return [team1action, team2action]
         } else {
@@ -187,7 +191,13 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
 //    IBActions
     
     func startGame(sender: UIBarButtonItem) {
-        println("Hello")
+        let gameNavigation = UINavigationController()
+        let newGame: GamePadViewController = GamePadViewController()
+        
+        newGame.currentGame = gameToPlay
+        gameNavigation.viewControllers = [newGame]
+        navigationController?.presentViewController(gameNavigation, animated: true, completion: nil)
+        
     }
 
 }

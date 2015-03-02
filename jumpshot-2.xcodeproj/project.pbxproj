@@ -20,6 +20,8 @@
 		31ABBE781A8B0202005A35B3 /* NewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABBE771A8B0202005A35B3 /* NewGameViewController.swift */; };
 		31ABBE7A1A8D08FC005A35B3 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABBE791A8D08FC005A35B3 /* Factory.swift */; };
 		31CBF6381A9A6BBF0086C4C9 /* PlayerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CBF6371A9A6BBF0086C4C9 /* PlayerProfileViewController.swift */; };
+		31CBF63A1AA2237D0086C4C9 /* GamePadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CBF6391AA2237D0086C4C9 /* GamePadViewController.swift */; };
+		31CBF63C1AA4BC140086C4C9 /* FrostedSidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CBF63B1AA4BC140086C4C9 /* FrostedSidebar.swift */; };
 		31EA476F1A97E786000C4D89 /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA476E1A97E786000C4D89 /* RLMSupport.swift */; };
 		31EA47711A97E791000C4D89 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31EA47701A97E791000C4D89 /* Realm.framework */; };
 		31EA47731A97E7EC000C4D89 /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 31EA47721A97E7EC000C4D89 /* libc++.1.dylib */; };
@@ -56,6 +58,8 @@
 		31ABBE771A8B0202005A35B3 /* NewGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameViewController.swift; sourceTree = "<group>"; };
 		31ABBE791A8D08FC005A35B3 /* Factory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		31CBF6371A9A6BBF0086C4C9 /* PlayerProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerProfileViewController.swift; sourceTree = "<group>"; };
+		31CBF6391AA2237D0086C4C9 /* GamePadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePadViewController.swift; sourceTree = "<group>"; };
+		31CBF63B1AA4BC140086C4C9 /* FrostedSidebar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrostedSidebar.swift; sourceTree = "<group>"; };
 		31EA476E1A97E786000C4D89 /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
 		31EA47701A97E791000C4D89 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		31EA47721A97E7EC000C4D89 /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "usr/lib/libc++.1.dylib"; sourceTree = SDKROOT; };
@@ -109,6 +113,7 @@
 		3197E3CC1A87D8DB00F846A7 /* jumpshot-2 */ = {
 			isa = PBXGroup;
 			children = (
+				31CBF63B1AA4BC140086C4C9 /* FrostedSidebar.swift */,
 				31EA47761A97F552000C4D89 /* AF+Date+Extension.swift */,
 				3197E3CF1A87D8DB00F846A7 /* AppDelegate.swift */,
 				31ABBE791A8D08FC005A35B3 /* Factory.swift */,
@@ -117,6 +122,7 @@
 				31ABBE731A89C082005A35B3 /* Statline.swift */,
 				3197E3F11A87D9A400F846A7 /* GamesViewController.swift */,
 				3197E3EF1A87D94B00F846A7 /* PlayersViewController.swift */,
+				31CBF6391AA2237D0086C4C9 /* GamePadViewController.swift */,
 				31ABBE771A8B0202005A35B3 /* NewGameViewController.swift */,
 				31ABBE751A8A5E05005A35B3 /* PlayerTableViewCell.swift */,
 				31CBF6371A9A6BBF0086C4C9 /* PlayerProfileViewController.swift */,
@@ -256,9 +262,11 @@
 				3197E3F41A87DBD100F846A7 /* Player.swift in Sources */,
 				31ABBE741A89C082005A35B3 /* Statline.swift in Sources */,
 				31ABBE781A8B0202005A35B3 /* NewGameViewController.swift in Sources */,
+				31CBF63C1AA4BC140086C4C9 /* FrostedSidebar.swift in Sources */,
 				31EA47771A97F552000C4D89 /* AF+Date+Extension.swift in Sources */,
 				31ABBE721A89C05F005A35B3 /* Game.swift in Sources */,
 				31ABBE7A1A8D08FC005A35B3 /* Factory.swift in Sources */,
+				31CBF63A1AA2237D0086C4C9 /* GamePadViewController.swift in Sources */,
 				3197E3D01A87D8DB00F846A7 /* AppDelegate.swift in Sources */,
 				31ABBE761A8A5E05005A35B3 /* PlayerTableViewCell.swift in Sources */,
 				31CBF6381A9A6BBF0086C4C9 /* PlayerProfileViewController.swift in Sources */,
