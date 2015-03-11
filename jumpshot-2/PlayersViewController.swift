@@ -25,10 +25,12 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
     var players: RLMResults!
     var selectedPlayer: Player!
     
+    var numberOfCols: CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Available Players"
+        self.numberOfCols = 4.0
         
         players = Player.allObjects()
         
@@ -55,25 +57,25 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.headerBar.backgroundColor = UIColor.grayColor()
         
         self.headerBarLabel1 = UILabel()
-        self.headerBarLabel1.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width / 4.0, height: headerBar.frame.height)
+        self.headerBarLabel1.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width / self.numberOfCols, height: headerBar.frame.height)
         self.headerBarLabel1.text = "PTS"
         self.headerBarLabel1.textColor = UIColor.whiteColor()
         self.headerBarLabel1.font = UIFont(name: "Futura-CondensedMedium", size: 20.0)
         self.headerBarLabel1.textAlignment = NSTextAlignment.Center
         
-        self.headerBarLabel2 = UILabel(frame: CGRect(x: self.view.bounds.width * (1.0/4.0), y: 0, width: self.view.bounds.width / 4.0, height: headerBar.bounds.height))
+        self.headerBarLabel2 = UILabel(frame: CGRect(x: self.view.bounds.width * (1.0/self.numberOfCols), y: 0, width: self.view.bounds.width / 4.0, height: headerBar.bounds.height))
         self.headerBarLabel2.text = "REBS"
         self.headerBarLabel2.textColor = UIColor.whiteColor()
         self.headerBarLabel2.font = UIFont(name: "Futura-CondensedMedium", size: 20.0)
         self.headerBarLabel2.textAlignment = NSTextAlignment.Center
 
-        self.headerBarLabel3 = UILabel(frame: CGRect(x: self.view.bounds.width * (2.0/4.0), y: 0, width: self.view.bounds.width / 4.0, height: headerBar.bounds.height))
+        self.headerBarLabel3 = UILabel(frame: CGRect(x: self.view.bounds.width * (2.0/self.numberOfCols), y: 0, width: self.view.bounds.width / 4.0, height: headerBar.bounds.height))
         self.headerBarLabel3.text = "ASTS"
         self.headerBarLabel3.textColor = UIColor.whiteColor()
         self.headerBarLabel3.font = UIFont(name: "Futura-CondensedMedium", size: 20.0)
         self.headerBarLabel3.textAlignment = NSTextAlignment.Center
 
-        self.headerBarLabel4 = UILabel(frame: CGRect(x: self.view.bounds.width * (3.0/4.0), y: 0, width: self.view.bounds.width / 4.0, height: headerBar.bounds.height))
+        self.headerBarLabel4 = UILabel(frame: CGRect(x: self.view.bounds.width * (3.0/self.numberOfCols), y: 0, width: self.view.bounds.width / 4.0, height: headerBar.bounds.height))
         self.headerBarLabel4.text = "BLKS"
         self.headerBarLabel4.textColor = UIColor.whiteColor()
         self.headerBarLabel4.font = UIFont(name: "Futura-CondensedMedium", size: 20.0)
