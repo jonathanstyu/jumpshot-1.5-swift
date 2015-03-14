@@ -72,19 +72,19 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.headerBarLabel1.font = UIFont(name: "Futura-CondensedMedium", size: 20.0)
         self.headerBarLabel1.textAlignment = NSTextAlignment.Center
         
-        self.headerBarLabel2 = UILabel(frame: CGRect(x: self.view.bounds.width * (2.0/self.numberOfCols), y: 0, width: self.view.bounds.width / 4.0, height: headerBar.bounds.height))
+        self.headerBarLabel2 = UILabel(frame: CGRect(x: self.view.bounds.width * (2.0/self.numberOfCols), y: 0, width: self.view.bounds.width / self.numberOfCols, height: headerBar.bounds.height))
         self.headerBarLabel2.text = "REBS"
         self.headerBarLabel2.textColor = UIColor.whiteColor()
         self.headerBarLabel2.font = UIFont(name: "Futura-CondensedMedium", size: 20.0)
         self.headerBarLabel2.textAlignment = NSTextAlignment.Center
 
-        self.headerBarLabel3 = UILabel(frame: CGRect(x: self.view.bounds.width * (3.0/self.numberOfCols), y: 0, width: self.view.bounds.width / 4.0, height: headerBar.bounds.height))
+        self.headerBarLabel3 = UILabel(frame: CGRect(x: self.view.bounds.width * (3.0/self.numberOfCols), y: 0, width: self.view.bounds.width / self.numberOfCols, height: headerBar.bounds.height))
         self.headerBarLabel3.text = "ASTS"
         self.headerBarLabel3.textColor = UIColor.whiteColor()
         self.headerBarLabel3.font = UIFont(name: "Futura-CondensedMedium", size: 20.0)
         self.headerBarLabel3.textAlignment = NSTextAlignment.Center
 
-        self.headerBarLabel4 = UILabel(frame: CGRect(x: self.view.bounds.width * (4.0/self.numberOfCols), y: 0, width: self.view.bounds.width / 4.0, height: headerBar.bounds.height))
+        self.headerBarLabel4 = UILabel(frame: CGRect(x: self.view.bounds.width * (4.0/self.numberOfCols), y: 0, width: self.view.bounds.width / self.numberOfCols, height: headerBar.bounds.height))
         self.headerBarLabel4.text = "BLKS"
         self.headerBarLabel4.textColor = UIColor.whiteColor()
         self.headerBarLabel4.font = UIFont(name: "Futura-CondensedMedium", size: 20.0)
@@ -112,7 +112,7 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
         let selectedPlayer = self.players.objectAtIndex(UInt(indexPath.row)) as! Player
         cell.nameLabel?.text = selectedPlayer.name.uppercaseString
         
-        cell.gamesCountLabel?.text = String(format: "%", selectedPlayer.playerStatLines.count)
+        cell.gamesCountLabel?.text = "\(selectedPlayer.playerStatLines.count)"
         cell.pointsAveragelabel?.text = String(format: "%.1f", selectedPlayer.averageStatistic("points"))
         cell.reboundsAverageLabel?.text = String(format: "%.1f", selectedPlayer.averageStatistic("rebounds"))
         cell.assistsAveragelabel?.text = String(format: "%.1f", selectedPlayer.averageStatistic("assists"))

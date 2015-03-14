@@ -38,11 +38,11 @@ class PlayerTableViewCell: UITableViewCell {
         
         nameLabel.frame = CGRect(x: self.headerBar.bounds.width * (1.0/15.0), y: 0, width: self.headerBar.bounds.width, height: self.headerBar.bounds.height * (0.75))
         
-        gamesCountLabel.frame = CGRect(x: 0, y: 0, width: self.bottomBar.bounds.width * (1.0/numberOfColumns), height: self.bottomBar.bounds.height)
-        pointsAveragelabel.frame = CGRect(x: self.gamesCountLabel.bounds.width, y: 0, width: self.bottomBar.bounds.width * (1.0/numberOfColumns), height: self.bottomBar.bounds.height)
-        reboundsAverageLabel.frame = CGRect(x: self.pointsAveragelabel.bounds.width, y: 0, width: self.bottomBar.bounds.width * (1.0/numberOfColumns), height: self.bottomBar.bounds.height)
-        assistsAveragelabel.frame = CGRect(x: self.pointsAveragelabel.bounds.width + self.reboundsAverageLabel.bounds.width, y: 0, width: self.bottomBar.bounds.width * (1.0/numberOfColumns), height: self.bottomBar.bounds.height)
-        blocksAveragelabel.frame = CGRect(x: self.pointsAveragelabel.bounds.width + self.reboundsAverageLabel.bounds.width + self.assistsAveragelabel.bounds.width, y: 0, width: self.bottomBar.bounds.width * (1.0/numberOfColumns), height: self.bottomBar.bounds.height)
+        gamesCountLabel.frame = CGRect(x: ((self.bottomBar.bounds.width / numberOfColumns) * 0.0), y: 0, width: self.bottomBar.bounds.width * (1.0/numberOfColumns), height: self.bottomBar.bounds.height)
+        pointsAveragelabel.frame = CGRect(x: ((self.bottomBar.bounds.width / numberOfColumns) * 1.0), y: 0, width: self.bottomBar.bounds.width * (1.0/numberOfColumns), height: self.bottomBar.bounds.height)
+        reboundsAverageLabel.frame = CGRect(x: ((self.bottomBar.bounds.width / numberOfColumns) * 2.0), y: 0, width: self.bottomBar.bounds.width * (1.0/numberOfColumns), height: self.bottomBar.bounds.height)
+        assistsAveragelabel.frame = CGRect(x: ((self.bottomBar.bounds.width / numberOfColumns) * 3.0), y: 0, width: self.bottomBar.bounds.width * (1.0/numberOfColumns), height: self.bottomBar.bounds.height)
+        blocksAveragelabel.frame = CGRect(x: ((self.bottomBar.bounds.width / numberOfColumns) * 4.0), y: 0, width: self.bottomBar.bounds.width * (1.0/numberOfColumns), height: self.bottomBar.bounds.height)
     }
     
     

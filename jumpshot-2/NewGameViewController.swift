@@ -136,10 +136,10 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let removeSelectClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
             
-            var selectedPlayer = tableSections[indexPath.section][indexPath.row] as Player
+            var selectedPlayer = self.tableSections[indexPath.section][indexPath.row] as Player
             
 //            tableView.cellForRowAtIndexPath(indexPath)?.accessoryView = nil
-            var oldSection = tableSections[indexPath.section]
+            var oldSection = self.tableSections[indexPath.section]
             var newSection = oldSection.filter({$0 == selectedPlayer})
             self.tableSections[indexPath.section] = newSection
             
