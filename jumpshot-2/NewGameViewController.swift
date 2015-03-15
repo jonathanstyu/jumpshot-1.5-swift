@@ -18,6 +18,7 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     var playersTable: UITableView!
     
     var startGameButton: UIBarButtonItem!
+    var resetButton: UIBarButtonItem!
     
     var team1View: UIView!
     var team2View: UIView!
@@ -28,14 +29,13 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var tableSections: [[Player]]!
     
-    var gameToPlay: Game!
-    
     let kMargin: CGFloat = (1.0/12.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "New Game"
         
+//        Take all the Player objects out of the RLMResults Object
         self.allPlayers = []
         self.playersRaw = Player.allObjects()
         
@@ -48,8 +48,6 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         self.tableSections = [self.team1, self.team2, self.allPlayers]
         
-        gameToPlay = Game()
-        
         setupUIElements()
     }
     
@@ -57,7 +55,9 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         let visibleHeight = self.view.bounds.height - self.navigationController!.navigationBar.frame.height - self.tabBarController!.tabBar.frame.height
         
         var startGameButton = UIBarButtonItem(title: "Start", style: .Plain, target: self, action: "startGame:")
-        self.navigationItem.rightBarButtonItem = startGameButton
+        var resetButton = UIBarButtonItem(title: "Reset", style: .Plain, target: self, action: "resetGame:")
+        
+        self.navigationItem.rightBarButtonItems = [startGameButton, resetButton]
         
         self.playersTable = UITableView()
         self.playersTable.frame = CGRect(x: self.view.bounds.origin.x, y: self.navigationController!.navigationBar.frame.height, width: self.view.bounds.width, height: self.view.bounds.height)
@@ -84,8 +84,6 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         let section = self.tableSections[indexPath.section]
         let selectedPlayer = section[indexPath.row] as Player
         cell.textLabel!.text = selectedPlayer.name
-//        cell.detailTextLabel!.text = "AGE: \(selectedPlayer.age) HEIGHT: \(selectedPlayer.height)"
-        println("team1: \(self.tableSections[0].count); team2: \(self.tableSections[1].count)")
         
         return cell
     }
@@ -95,25 +93,15 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         
-        var teamBadge = UILabel()
-        teamBadge.textColor = UIColor.blackColor()
-        teamBadge.font = UIFont(name: "Lato-Regular", size: 16)
-        teamBadge.textAlignment = NSTextAlignment.Center
-        teamBadge.layer.cornerRadius = 4
-        teamBadge.clipsToBounds = true
-        teamBadge.frame = CGRectMake(0, 0, 50, 20)
-        
-        
         let team1SelectClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
             
             var selectedPlayer = tableSections[indexPath.section][indexPath.row] as Player
-            self.tableSections[0].append(selectedPlayer)
-            
-//            tableView.cellForRowAtIndexPath(indexPath)?.accessoryView = nil
-//            teamBadge.text = "1"
-//            teamBadge.backgroundColor = UIColor.darkGrayColor()
-//            teamBadge.textColor = UIColor.whiteColor()
-//            tableView.cellForRowAtIndexPath(indexPath)?.accessoryView = teamBadge
+            for var i = 0; i < self.tableSections[2].count; ++i {
+                if self.tableSections[2][i] == selectedPlayer {
+                    self.tableSections[2].removeAtIndex(i)
+                    self.tableSections[0].append(selectedPlayer)
+                }
+            }
             
             tableView.setEditing(false, animated: true)
             tableView.reloadData()
@@ -122,13 +110,13 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         let team2SelectClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
             
             var selectedPlayer = tableSections[indexPath.section][indexPath.row] as Player
-            self.tableSections[1].append(selectedPlayer)
             
-//            tableView.cellForRowAtIndexPath(indexPath)?.accessoryView = nil
-//            teamBadge.text = "2"
-//            teamBadge.backgroundColor = UIColor.blueColor()
-//            teamBadge.textColor = UIColor.whiteColor()
-//            tableView.cellForRowAtIndexPath(indexPath)?.accessoryView = teamBadge
+            for var i = 0; i < self.tableSections[2].count; ++i {
+                if self.tableSections[2][i] == selectedPlayer {
+                    self.tableSections[2].removeAtIndex(i)
+                    self.tableSections[1].append(selectedPlayer)
+                }
+            }
             
             tableView.setEditing(false, animated: true)
             tableView.reloadData()
@@ -138,10 +126,12 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             var selectedPlayer = self.tableSections[indexPath.section][indexPath.row] as Player
             
-//            tableView.cellForRowAtIndexPath(indexPath)?.accessoryView = nil
-            var oldSection = self.tableSections[indexPath.section]
-            var newSection = oldSection.filter({$0 == selectedPlayer})
-            self.tableSections[indexPath.section] = newSection
+            for var i = 0; i < self.tableSections[indexPath.section].count; ++i {
+                if self.tableSections[indexPath.section][i] == selectedPlayer {
+                    self.tableSections[indexPath.section].removeAtIndex(i)
+                    self.tableSections[2].append(selectedPlayer)
+                }
+            }
             
             tableView.setEditing(false, animated: true)
             tableView.reloadData()
@@ -198,9 +188,18 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         let gameNavigation = UINavigationController()
         let newGame: GamePadViewController = GamePadViewController()
         
-        newGame.currentGame = gameToPlay
+        newGame.currentGame = Factory.createGame(team1: self.tableSections[0], team2: self.tableSections[1])
+        
         gameNavigation.viewControllers = [newGame]
         navigationController?.presentViewController(gameNavigation, animated: true, completion: nil)
+    }
+    
+    func resetGame(sender: UIBarButtonItem) {
+        self.tableSections[0].removeAll(keepCapacity: true)
+        self.tableSections[1].removeAll(keepCapacity: true)
+        self.tableSections[2] = self.allPlayers
+        
+        self.playersTable.reloadData()
         
     }
 
