@@ -13,7 +13,6 @@ import Realm
 class GamesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var gamesTable: UITableView!
-
     
     var games: RLMResults!
     var selectedGame: Game!
@@ -56,9 +55,32 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
         return cell
     }
     
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        let selectedGame = self.games.objectAtIndex(UInt(indexPath.row)) as! Game
-        
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        
+        let gameContinueClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+            
+            var gameToContinue = self.games[UInt(indexPath.row)] as! Game
+            
+            let gameNavigation = UINavigationController()
+            let newGame: GamePadViewController = GamePadViewController(nibName: "GamePadView", bundle: nil)
+            
+            newGame.currentGame = gameToContinue
+            tableView.setEditing(false, animated: true)
+            
+            gameNavigation.viewControllers = [newGame]
+            self.navigationController?.presentViewController(gameNavigation, animated: true, completion: nil)
+
+        }
+        
+        var continueGame = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Continue?", handler: gameContinueClosure)
+        
+        continueGame.backgroundColor = UIColor.darkGrayColor()
+        
+        return [continueGame]
+    }
+
     
 }
