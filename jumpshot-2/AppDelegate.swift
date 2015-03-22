@@ -41,6 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UINavigationBar.appearance().barStyle = UIBarStyle.Black
         
+//        var swipe = SwipePageViewController()
+        
         self.window!.rootViewController = tabs
         self.window?.makeKeyAndVisible()
         

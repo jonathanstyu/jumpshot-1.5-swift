@@ -52,7 +52,7 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func setupUIElements() {
-        let visibleHeight = self.view.bounds.height - self.navigationController!.navigationBar.frame.height - self.tabBarController!.tabBar.frame.height
+        let visibleHeight = self.view.bounds.height - self.navigationController!.navigationBar.frame.height
         
         var startGameButton = UIBarButtonItem(title: "Start", style: .Plain, target: self, action: "startGame:")
         var resetButton = UIBarButtonItem(title: "Reset", style: .Plain, target: self, action: "resetGame:")

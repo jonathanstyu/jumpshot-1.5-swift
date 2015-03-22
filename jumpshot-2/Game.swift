@@ -16,8 +16,21 @@ class Game: RLMObject {
     dynamic var team1_players = RLMArray(objectClassName: "Statline")
     dynamic var team2_players = RLMArray(objectClassName: "Statline")
     
-//    func tallySums(teamNumber tn: Int, requestedStat rs: String) -> Int {
-//        
-//    }
-    
+    func tallyTeamScore(team: Int) -> Int {
+        var totalScore: Int = 0
+        
+        if team == 1 {
+            for var i = 0; i < Int(self.team1_players.count); ++i {
+                let stat = self.team1_players.objectAtIndex(UInt(i)) as! Statline
+                totalScore += stat.points
+            }
+        } else {
+            for var i = 0; i < Int(self.team2_players.count); ++i {
+                let stat = self.team2_players.objectAtIndex(UInt(i)) as! Statline
+                totalScore += stat.points
+            }
+        }
+        
+        return totalScore
+    }
 }
