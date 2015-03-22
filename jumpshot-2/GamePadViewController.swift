@@ -19,6 +19,10 @@ class GamePadViewController: UIViewController {
     var gameTitleLabel: UILabel!
     var team1Label: UILabel!
     var team2Label: UILabel!
+    
+    var restartButton: UIButton!
+    var stopButton: UIButton!
+    var pauseButton: UIButton!
 
     let kMargin: CGFloat = (1.0/12.0)
     
@@ -30,32 +34,22 @@ class GamePadViewController: UIViewController {
         updateViewElements()
     }
     
-    func setUpElements() {
-        var visibleHeight: CGFloat = self.view.bounds.height - self.navigationController!.navigationBar.frame.height
-        
-        navigationItem.title = currentGame.datePlayed.toString()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "dismissModal")
-
-        self.scoreView = self.view.viewWithTag(1)! as UIView
-        self.team1Label = self.view.viewWithTag(2) as! UILabel
-        self.team2Label = self.view.viewWithTag(3) as! UILabel
-        self.team1View = self.view.viewWithTag(6) as UIView!
-        self.team2View = self.view.viewWithTag(7) as UIView!
-        
+    override func viewDidLayoutSubviews() {
         for var i = 0; i < Int(self.currentGame.team1_players.count); ++i {
             var playerButtonLeft = UIButton()
             var statline = self.currentGame.team1_players.objectAtIndex(UInt(i)) as! Statline
-            
+
             playerButtonLeft.tag = i + 200
             playerButtonLeft.setTitle(statline.owner?.name, forState: UIControlState.Normal)
             playerButtonLeft.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            playerButtonLeft.backgroundColor = UIColor.redColor()
-            playerButtonLeft.frame = CGRect(x: 0, y: 0, width: 100, height: 25)
+            playerButtonLeft.backgroundColor = UIColor.blackColor()
             playerButtonLeft.addTarget(self, action: "buttonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
-            
+
+            playerButtonLeft.frame = CGRectMake(0, ((self.team1View.frame.height * 0.8) / CGFloat(self.currentGame.team1_players.count)) * CGFloat(i), self.team1View.frame.size.width, 100)
+
             self.team1View.addSubview(playerButtonLeft)
         }
-
+        
         for var i = 0; i < Int(self.currentGame.team2_players.count); ++i {
             
             var playerButtonRight = UIButton()
@@ -65,13 +59,36 @@ class GamePadViewController: UIViewController {
             playerButtonRight.setTitle(statline.owner?.name, forState: UIControlState.Normal)
             playerButtonRight.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             playerButtonRight.backgroundColor = UIColor.redColor()
-            playerButtonRight.frame = CGRect(x: 0, y: 0, width: 100, height: 25)
             playerButtonRight.addTarget(self, action: "buttonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
             
-            self.team2View.addSubview(playerButtonRight)
+            playerButtonRight.frame = CGRectMake(0, ((self.team2View.frame.height * 0.8) / CGFloat(self.currentGame.team2_players.count)) * CGFloat(i), self.team2View.frame.size.width, 100)
             
+            self.team2View.addSubview(playerButtonRight)
         }
 
+    }
+    
+    func setUpElements() {
+        var visibleHeight: CGFloat = self.view.bounds.height - self.navigationController!.navigationBar.frame.height
+        
+        navigationItem.title = currentGame.datePlayed.toString()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "dismissModal")
+
+        self.scoreView = self.view.viewWithTag(1)! as UIView
+        self.team1Label = self.view.viewWithTag(2) as! UILabel
+        self.team2Label = self.view.viewWithTag(3) as! UILabel
+        
+//        To prevent finding nil optionals, click on the "installed" 
+        self.team1View = self.view.viewWithTag(4) as UIView!
+        self.team2View = self.view.viewWithTag(5) as UIView!
+        self.restartButton = self.view.viewWithTag(8) as! UIButton
+        self.pauseButton = self.view.viewWithTag(9) as! UIButton
+        self.stopButton = self.view.viewWithTag(10) as! UIButton
+        
+//        set up buttons 
+        self.restartButton.addTarget(self, action: "restartButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.stopButton.addTarget(self, action: "stopButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.pauseButton.addTarget(self, action: "pauseButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     func updateViewElements() {
@@ -84,7 +101,7 @@ class GamePadViewController: UIViewController {
     }
     
     func buttonPressed(sender: UIButton) {
-        var frostedSideBar: FrostedSidebar = FrostedSidebar(itemImages: [], colors: nil, selectedItemIndices: NSIndexSet())
+        var frostedSideBar: FrostedSidebar = FrostedSidebar(itemImages: [UIImage(named: "MAKE.png")!], colors: nil, selectedItemIndices: NSIndexSet(index: 0))
         
         println(sender.tag % 200)
         if Int(sender.tag % 200) >= 100 {
@@ -95,5 +112,16 @@ class GamePadViewController: UIViewController {
         
         frostedSideBar.showInViewController(self, animated: true)
     }
+    
+    func stopButtonPressed(sender: UIButton) {
+        println("stop button clicked!")
+    }
+    
+    func pauseButtonPressed(sender: UIButton) {
+        println("pause button clicked!")
+    }
 
+    func restartButtonPressed(sender: UIButton) {
+        println("restart button clicked!")
+    }
 }
