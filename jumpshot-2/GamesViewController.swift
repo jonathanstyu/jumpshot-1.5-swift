@@ -65,7 +65,7 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
             var gameToContinue = self.games[UInt(indexPath.row)] as! Game
             
             let gameNavigation = UINavigationController()
-            let newGame: GamePadViewController = GamePadViewController(nibName: "GamePadView", bundle: nil)
+            let newGame: GamePadViewController = GamePadViewController()
             
             newGame.currentGame = gameToContinue
             tableView.setEditing(false, animated: true)
