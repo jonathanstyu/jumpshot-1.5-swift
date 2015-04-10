@@ -31,7 +31,7 @@ class Factory {
         
         if games.count == 0 {
             for var i = 0; i < 3; ++i {
-                let newGame = Factory.createGame(team1: [players.objectAtIndex(0) as! Player], team2: [players.objectAtIndex(1) as! Player])
+                let newGame = Factory.createGame(team1: [players.objectAtIndex(0) as! Player, players.objectAtIndex(2) as! Player], team2: [players.objectAtIndex(1) as! Player, players.objectAtIndex(3) as! Player])
             }
         }
     }

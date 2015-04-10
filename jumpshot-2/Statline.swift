@@ -40,4 +40,35 @@ class Statline: RLMObject {
         }
     }
     
+    func statChange(event: String) -> Void {
+        let realm = RLMRealm.defaultRealm()
+        
+        realm.beginWriteTransaction()
+        switch event {
+        case "fgMade":
+            self.points += 2
+            self.fieldGoalsMade += 1
+        case "fgMiss":
+            self.fieldGoalsMissed += 1
+        case "3fgMade":
+            self.points += 3
+            self.threeFieldGoalsMade += 1
+        case "3fgMiss":
+            self.threeFieldGoalsMissed += 1
+        case "rebound":
+            self.rebounds += 1
+        case "assist":
+            self.assists += 1
+        case "steals":
+            self.steals += 1
+        case "block":
+            self.blocks += 1
+        case "turnover":
+            self.turnovers += 1
+        default:
+            self.points += 0
+        }
+        realm.commitWriteTransaction()
+    }
+    
 }
