@@ -140,7 +140,36 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
 //    IBActions
     
     func addPlayer() {
-        println("Hello there")
+        var inputTextField: UITextField?
+        
+        //        Initialize the UIAlertController
+        let addItem: UIAlertController = UIAlertController(title: "New Player Name?", message: "Input their name below.", preferredStyle: .Alert)
+        
+        //        Initialize the button
+        let cancelItem: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { action -> Void in
+            
+        })
+        addItem.addAction(cancelItem)
+        
+        //        Initialize the Confirm button
+        let addItemButton: UIAlertAction = UIAlertAction(title: "Add", style: .Default, handler: { action -> Void in
+            
+            var newPlayerName: String = inputTextField!.text as String
+            Factory.createNewPlayer(newPlayerName)
+            self.playersTable.reloadData()
+            //            println("The Text here was: \(string)")
+        })
+        
+        addItem.addAction(addItemButton)
+        
+        //        Initalize the Text Field
+        addItem.addTextFieldWithConfigurationHandler { textField -> Void in
+            inputTextField = textField
+            textField.textColor = UIColor.blueColor()
+        }
+        
+        self.presentViewController(addItem, animated: true, completion: nil)
+
     }
 
     

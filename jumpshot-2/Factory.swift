@@ -36,6 +36,8 @@ class Factory {
         }
     }
     
+//    For setting up test datas
+    
     class func createGame(team1 t1: [Player], team2 t2: [Player]) -> Game {
         let newGame = Game()
         let realm = RLMRealm.defaultRealm()
@@ -66,6 +68,21 @@ class Factory {
         
         return newGame
     }
+    
+    class func createNewPlayer(name: String) -> Void {
+        let newPlayer = Player()
+        let realm = RLMRealm.defaultRealm()
+        
+        newPlayer.name = name
+        newPlayer.age = Int(arc4random_uniform(UInt32(56)))
+        newPlayer.height = "\(Int(arc4random_uniform(UInt32(2)))+5)'\(Int(arc4random_uniform(UInt32(2)))+9)"
+        
+        realm.beginWriteTransaction()
+        realm.addObject(newPlayer)
+        realm.commitWriteTransaction()
+    }
+    
+//    For creating Randos
     
     class func createRandoStatline() -> Statline {
         let line = Statline()
