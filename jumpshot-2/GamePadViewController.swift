@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Realm
 
 class GamePadViewController: UIViewController {
     var currentGame: Game!
@@ -38,6 +39,7 @@ class GamePadViewController: UIViewController {
         setUpElements()
         createButtons()
         updateViewElements()
+        
     }
     
     func setUpElements() {
@@ -49,33 +51,33 @@ class GamePadViewController: UIViewController {
 
 //        Container view for the scores
         self.scoreBarView = UIView()
-        self.scoreBarView.frame = CGRectMake(0, yOrigin, self.view.bounds.width / 2.0, (visibleHeight / 5.0))
+        self.scoreBarView.frame = CGRectMake(0, yOrigin, self.view.bounds.width / 2.0, (visibleHeight / 6.0))
         self.scoreBarView.backgroundColor = UIColor.greenColor()
         self.view.addSubview(self.scoreBarView)
 
         self.team1ScoreLabel = UILabel()
-        self.team1ScoreLabel.frame = CGRectMake(0, 0, (self.scoreBarView.frame.width / 2.0), self.scoreBarView.frame.height * 0.75)
+        self.team1ScoreLabel.frame = CGRectMake(0, 0, (self.scoreBarView.frame.width / 2.0), self.scoreBarView.frame.height * 0.65)
         self.team1ScoreLabel.font = UIFont(name: "Futura-CondensedMedium", size: 34.0)
         self.team1ScoreLabel.textAlignment = NSTextAlignment.Center
         self.team1ScoreLabel.text = "0"
         self.scoreBarView.addSubview(self.team1ScoreLabel)
         
         self.team1Label = UILabel()
-        self.team1Label.frame = CGRectMake(0, self.team1ScoreLabel.frame.size.height, self.team1ScoreLabel.frame.size.width, self.scoreBarView.frame.height * 0.25)
+        self.team1Label.frame = CGRectMake(0, self.team1ScoreLabel.frame.size.height, self.team1ScoreLabel.frame.size.width, self.scoreBarView.frame.height * 0.35)
         self.team1Label.font = UIFont(name: "Futura-CondensedMedium", size: 20.0)
         self.team1Label.textAlignment = NSTextAlignment.Center
         self.team1Label.text = "Team 1"
         self.scoreBarView.addSubview(self.team1Label)
         
         self.team2ScoreLabel = UILabel()
-        self.team2ScoreLabel.frame = CGRectMake(self.scoreBarView.frame.size.width / 2.0, 0, (self.scoreBarView.frame.width / 2.0), self.scoreBarView.frame.height * 0.75)
+        self.team2ScoreLabel.frame = CGRectMake(self.scoreBarView.frame.size.width / 2.0, 0, self.team1ScoreLabel.frame.size.width, self.team1ScoreLabel.frame.size.height)
         self.team2ScoreLabel.font = UIFont(name: "Futura-CondensedMedium", size: 34.0)
         self.team2ScoreLabel.textAlignment = NSTextAlignment.Center
         self.team2ScoreLabel.text = "0"
         self.scoreBarView.addSubview(self.team2ScoreLabel)
         
         self.team2Label = UILabel()
-        self.team2Label.frame = CGRectMake(self.scoreBarView.frame.size.width / 2.0, self.team2ScoreLabel.frame.size.height, self.team2ScoreLabel.frame.size.width, self.scoreBarView.frame.height * 0.25)
+        self.team2Label.frame = CGRectMake(self.scoreBarView.frame.size.width / 2.0, self.team2ScoreLabel.frame.size.height, self.team2ScoreLabel.frame.size.width, self.team1Label.frame.size.height)
         self.team2Label.font = UIFont(name: "Futura-CondensedMedium", size: 20.0)
         self.team2Label.textAlignment = NSTextAlignment.Center
         self.team2Label.text = "Team 2"
@@ -83,26 +85,15 @@ class GamePadViewController: UIViewController {
         
 //        Container views for the first and second teams
         self.team1View = UIView()
-        self.team1View.frame = CGRectMake(0, yOrigin + self.scoreBarView.frame.size.height, self.view.frame.width / 2.0, visibleHeight / 3.0)
+        self.team1View.frame = CGRectMake(0, yOrigin + self.scoreBarView.frame.size.height, self.view.frame.width / 2.0, visibleHeight / 2.5)
         self.team1View.backgroundColor = UIColor.lightGrayColor()
         self.view.addSubview(self.team1View)
         
         self.team2View = UIView()
-        self.team2View.frame = CGRectMake(self.view.frame.width / 2.0, yOrigin + self.scoreBarView.frame.height, self.view.frame.width / 2.0, visibleHeight / 3.0)
+        self.team2View.frame = CGRectMake(self.view.frame.width / 2.0, yOrigin + self.scoreBarView.frame.height, self.view.frame.width / 2.0, self.team1View.frame.size.height)
         self.team2View.backgroundColor = UIColor.yellowColor()
         self.view.addSubview(self.team2View)
        
-//        self.pauseButton = self.view.viewWithTag(9) as! UIButton
-//        self.stopButton = self.view.viewWithTag(10) as! UIButton
-//        
-////        set up buttons 
-//        self.restartButton.sizeToFit()
-//        self.restartButton.addTarget(self, action: "restartButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
-//        self.restartButton.center = CGPoint(x: <#CGFloat#>, y: <#CGFloat#>)
-//        self.scoreView.addSubview(self.restartButton)
-//        
-//        self.stopButton.addTarget(self, action: "stopButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
-//        self.pauseButton.addTarget(self, action: "pauseButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     func createButtons() {
@@ -110,47 +101,43 @@ class GamePadViewController: UIViewController {
 //      Add buttons to the players view
         var buttonMargin: CGFloat = 5.0
         
-        for var i = 0; i < Int(self.currentGame.team1_players.count); ++i {
-            var playerButtonLeft = UIButton()
-            var statline = self.currentGame.team1_players.objectAtIndex(UInt(i)) as! Statline
+        for var j = 0; j < 2; ++j {
+            var tagAdd: Int
+            var roster: RLMArray
+            var rosterView: UIView
             
-            playerButtonLeft.tag = i + 200
-            playerButtonLeft.setTitle(statline.owner?.name, forState: UIControlState.Normal)
-            playerButtonLeft.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            playerButtonLeft.backgroundColor = UIColor.blackColor()
-            playerButtonLeft.addTarget(self, action: "buttonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
-            playerButtonLeft.layer.borderWidth = 1
-            playerButtonLeft.layer.borderColor = UIColor.redColor().CGColor
+            if j == 0 {
+                roster = self.currentGame.team1_players
+                tagAdd = 200
+                rosterView = self.team1View
+            } else {
+                roster = self.currentGame.team2_players
+                tagAdd = 300
+                rosterView = self.team2View
+            }
             
-            var playerCount = self.currentGame.team1_players.count
-            var playerButtonLeftHeight = (self.team1View.frame.size.height - buttonMargin * CGFloat(playerCount + 1)) / CGFloat(playerCount)
-            
-            playerButtonLeft.frame = CGRect(x: buttonMargin, y: buttonMargin + playerButtonLeftHeight * CGFloat(i), width: (self.view.frame.width / 2.0) - buttonMargin * 2, height: playerButtonLeftHeight)
-            
-            self.team1View.addSubview(playerButtonLeft)
+            for var i = 0; i < Int(roster.count); ++i {
+                var playerButton = UIView()
+                var playerStatline = roster.objectAtIndex(UInt(i)) as! Statline
+                var nameLabel = UILabel()
+                
+                var playerButtonHeight = (rosterView.frame.size.height - buttonMargin * CGFloat(roster.count + 1)) / CGFloat(roster.count)
+                
+                playerButton.frame = CGRect(x: buttonMargin, y: buttonMargin + playerButtonHeight * CGFloat(i), width: (self.view.frame.width / 2.0) - buttonMargin * 2, height: playerButtonHeight)
+                playerButton.tag = i + tagAdd
+                playerButton.backgroundColor = UIColor.whiteColor()
+                playerButton.userInteractionEnabled = true
+                playerButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("buttonPressed:")))
+                playerButton.layer.borderWidth = 1
+                playerButton.layer.borderColor = UIColor.redColor().CGColor
+                
+                nameLabel.frame = CGRect(x: 0, y: 0, width: playerButton.bounds.size.width, height: playerButton.bounds.size.height * 0.4)
+                nameLabel.text = playerStatline.owner?.name
+                
+                playerButton.addSubview(nameLabel)
+                rosterView.addSubview(playerButton)
+            }
         }
-        
-        for var i = 0; i < Int(self.currentGame.team2_players.count); ++i {
-            
-            var playerButtonRight = UIButton()
-            var statline = self.currentGame.team2_players.objectAtIndex(UInt(i)) as! Statline
-            
-            playerButtonRight.tag = i + 300
-            playerButtonRight.setTitle(statline.owner?.name, forState: UIControlState.Normal)
-            playerButtonRight.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            playerButtonRight.backgroundColor = UIColor.redColor()
-            playerButtonRight.addTarget(self, action: "buttonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
-            playerButtonRight.layer.borderWidth = 1
-            playerButtonRight.layer.borderColor = UIColor.redColor().CGColor
-            
-            var playerCount = self.currentGame.team2_players.count
-            var playerButtonRightHeight = (self.team2View.frame.size.height - buttonMargin * CGFloat(playerCount + 1)) / CGFloat(playerCount)
-            
-            playerButtonRight.frame = CGRect(x: buttonMargin, y: buttonMargin + playerButtonRightHeight * CGFloat(i), width: (self.view.frame.width / 2.0) - buttonMargin * 2, height: playerButtonRightHeight)
-            
-            self.team2View.addSubview(playerButtonRight)
-        }
-        
     }
     
     func updateViewElements() {
@@ -162,7 +149,9 @@ class GamePadViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func buttonPressed(sender: UIButton) {
+    func buttonPressed(gesture: UITapGestureRecognizer) {
+        var sender: UIView = gesture.view!
+        
         var frostedSideBar: FrostedSidebar = FrostedSidebar(itemImages: [
             UIImage(named: "FG")!,
             UIImage(named: "3FG")!,
@@ -175,11 +164,11 @@ class GamePadViewController: UIViewController {
 //        Right or Left team?
         if Int(sender.tag % 200) >= 100 {
 //            Team 1
-            self.statlineToModify = self.currentGame.team1_players.objectAtIndex(UInt(sender.tag - 300)) as! Statline
+            self.statlineToModify = self.currentGame.team2_players.objectAtIndex(UInt(sender.tag - 300)) as! Statline
             frostedSideBar.showFromRight = false
         } else {
 //            Team 2
-            self.statlineToModify = self.currentGame.team2_players.objectAtIndex(UInt(sender.tag - 200)) as! Statline
+            self.statlineToModify = self.currentGame.team1_players.objectAtIndex(UInt(sender.tag - 200)) as! Statline
             frostedSideBar.showFromRight = true
         }
         
