@@ -52,12 +52,12 @@ class GamePadViewController: UIViewController {
 //        Container view for the scores
         self.scoreBarView = UIView()
         self.scoreBarView.frame = CGRectMake(0, yOrigin, self.view.bounds.width / 2.0, (visibleHeight / 6.0))
-        self.scoreBarView.backgroundColor = UIColor.greenColor()
+        self.scoreBarView.backgroundColor = UIColor(rgba: "#bdc3c7")
         self.view.addSubview(self.scoreBarView)
 
         self.team1ScoreLabel = UILabel()
         self.team1ScoreLabel.frame = CGRectMake(0, 0, (self.scoreBarView.frame.width / 2.0), self.scoreBarView.frame.height * 0.65)
-        self.team1ScoreLabel.font = UIFont(name: "Futura-CondensedMedium", size: 34.0)
+        self.team1ScoreLabel.font = UIFont(name: "Futura-CondensedMedium", size: 40.0)
         self.team1ScoreLabel.textAlignment = NSTextAlignment.Center
         self.team1ScoreLabel.text = "0"
         self.scoreBarView.addSubview(self.team1ScoreLabel)
@@ -71,7 +71,7 @@ class GamePadViewController: UIViewController {
         
         self.team2ScoreLabel = UILabel()
         self.team2ScoreLabel.frame = CGRectMake(self.scoreBarView.frame.size.width / 2.0, 0, self.team1ScoreLabel.frame.size.width, self.team1ScoreLabel.frame.size.height)
-        self.team2ScoreLabel.font = UIFont(name: "Futura-CondensedMedium", size: 34.0)
+        self.team2ScoreLabel.font = UIFont(name: "Futura-CondensedMedium", size: 40.0)
         self.team2ScoreLabel.textAlignment = NSTextAlignment.Center
         self.team2ScoreLabel.text = "0"
         self.scoreBarView.addSubview(self.team2ScoreLabel)
@@ -117,24 +117,26 @@ class GamePadViewController: UIViewController {
             }
             
             for var i = 0; i < Int(roster.count); ++i {
-                var playerButton = UIView()
-                var playerStatline = roster.objectAtIndex(UInt(i)) as! Statline
-                var nameLabel = UILabel()
-                
                 var playerButtonHeight = (rosterView.frame.size.height - buttonMargin * CGFloat(roster.count + 1)) / CGFloat(roster.count)
+                var playerButton = PlayerSelectSquare(frame: CGRect(x: buttonMargin, y: buttonMargin + playerButtonHeight * CGFloat(i), width: (self.view.frame.width / 2.0) - buttonMargin * 2, height: playerButtonHeight))
+                var playerStatline = roster.objectAtIndex(UInt(i)) as! Statline
                 
-                playerButton.frame = CGRect(x: buttonMargin, y: buttonMargin + playerButtonHeight * CGFloat(i), width: (self.view.frame.width / 2.0) - buttonMargin * 2, height: playerButtonHeight)
                 playerButton.tag = i + tagAdd
-                playerButton.backgroundColor = UIColor.whiteColor()
-                playerButton.userInteractionEnabled = true
                 playerButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("buttonPressed:")))
-                playerButton.layer.borderWidth = 1
                 playerButton.layer.borderColor = UIColor.redColor().CGColor
                 
-                nameLabel.frame = CGRect(x: 0, y: 0, width: playerButton.bounds.size.width, height: playerButton.bounds.size.height * 0.4)
-                nameLabel.text = playerStatline.owner?.name
+                if tagAdd == 200 {
+                    playerButton.teamBadge.text = "Team 1"
+                    playerButton.teamBadge.backgroundColor = UIColor(rgba: "#8e44ad")
+                    playerButton.teamBadge.textColor = UIColor.whiteColor()
+                } else {
+                    playerButton.teamBadge.text = "Team 2"
+                    playerButton.teamBadge.backgroundColor = UIColor(rgba: "#e74c3c")
+                    playerButton.teamBadge.textColor = UIColor.whiteColor()
+                }
                 
-                playerButton.addSubview(nameLabel)
+                playerButton.nameLabel.text = playerStatline.owner?.name.uppercaseString
+                
                 rosterView.addSubview(playerButton)
             }
         }

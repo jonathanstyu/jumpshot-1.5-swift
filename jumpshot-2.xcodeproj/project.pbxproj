@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31732A0A1AE3276C00FAF369 /* PlayerSelectSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31732A091AE3276C00FAF369 /* PlayerSelectSquare.swift */; };
+		31732A0C1AE3380C00FAF369 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31732A0B1AE3380C00FAF369 /* UIColorExtension.swift */; };
 		3197E3D01A87D8DB00F846A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197E3CF1A87D8DB00F846A7 /* AppDelegate.swift */; };
 		3197E3D71A87D8DB00F846A7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3197E3D61A87D8DB00F846A7 /* Images.xcassets */; };
 		3197E3DA1A87D8DB00F846A7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3197E3D81A87D8DB00F846A7 /* LaunchScreen.xib */; };
@@ -42,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		31732A091AE3276C00FAF369 /* PlayerSelectSquare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerSelectSquare.swift; sourceTree = "<group>"; };
+		31732A0B1AE3380C00FAF369 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		3197E3CA1A87D8DB00F846A7 /* jumpshot-2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "jumpshot-2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3197E3CE1A87D8DB00F846A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3197E3CF1A87D8DB00F846A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +121,7 @@
 			children = (
 				31CBF63B1AA4BC140086C4C9 /* FrostedSidebar.swift */,
 				31EA47761A97F552000C4D89 /* AF+Date+Extension.swift */,
+				31732A0B1AE3380C00FAF369 /* UIColorExtension.swift */,
 				3197E3CF1A87D8DB00F846A7 /* AppDelegate.swift */,
 				31ABBE791A8D08FC005A35B3 /* Factory.swift */,
 				3197E3F31A87DBD100F846A7 /* Player.swift */,
@@ -126,6 +131,7 @@
 				3197E3F11A87D9A400F846A7 /* GamesViewController.swift */,
 				3197E3EF1A87D94B00F846A7 /* PlayersViewController.swift */,
 				31CBF6391AA2237D0086C4C9 /* GamePadViewController.swift */,
+				31732A091AE3276C00FAF369 /* PlayerSelectSquare.swift */,
 				31ABBE771A8B0202005A35B3 /* NewGameViewController.swift */,
 				31ABBE751A8A5E05005A35B3 /* PlayerTableViewCell.swift */,
 				31CBF6371A9A6BBF0086C4C9 /* PlayerProfileViewController.swift */,
@@ -267,12 +273,14 @@
 				31ABBE781A8B0202005A35B3 /* NewGameViewController.swift in Sources */,
 				31CBF63C1AA4BC140086C4C9 /* FrostedSidebar.swift in Sources */,
 				31EA47771A97F552000C4D89 /* AF+Date+Extension.swift in Sources */,
+				31732A0C1AE3380C00FAF369 /* UIColorExtension.swift in Sources */,
 				31ABBE721A89C05F005A35B3 /* Game.swift in Sources */,
 				31ABBE7A1A8D08FC005A35B3 /* Factory.swift in Sources */,
 				31CBF63A1AA2237D0086C4C9 /* GamePadViewController.swift in Sources */,
 				3197E3D01A87D8DB00F846A7 /* AppDelegate.swift in Sources */,
 				31ABBE761A8A5E05005A35B3 /* PlayerTableViewCell.swift in Sources */,
 				31CBF6381A9A6BBF0086C4C9 /* PlayerProfileViewController.swift in Sources */,
+				31732A0A1AE3276C00FAF369 /* PlayerSelectSquare.swift in Sources */,
 				31EA476F1A97E786000C4D89 /* RLMSupport.swift in Sources */,
 				3197E3F21A87D9A400F846A7 /* GamesViewController.swift in Sources */,
 				3197E3F01A87D94B00F846A7 /* PlayersViewController.swift in Sources */,
