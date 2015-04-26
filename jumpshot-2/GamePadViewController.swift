@@ -23,7 +23,6 @@ class GamePadViewController: UIViewController {
     var team1ScoreLabel: UILabel!
     var team2ScoreLabel: UILabel!
 
-    
     var restartButton: UIButton!
     var stopButton: UIButton!
     var pauseButton: UIButton!
@@ -32,10 +31,15 @@ class GamePadViewController: UIViewController {
     
     var statlineToModify: Statline!
     
+    var playerButtonArray: [PlayerSelectSquare]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.whiteColor()
         UINavigationBar.appearance().barStyle = UIBarStyle.Default
+        
+        self.playerButtonArray = []
+        
         setUpElements()
         createButtons()
         updateViewElements()
@@ -118,10 +122,10 @@ class GamePadViewController: UIViewController {
             
             for var i = 0; i < Int(roster.count); ++i {
                 var playerButtonHeight = (rosterView.frame.size.height - buttonMargin * CGFloat(roster.count + 1)) / CGFloat(roster.count)
-                var playerButton = PlayerSelectSquare(frame: CGRect(x: buttonMargin, y: buttonMargin + playerButtonHeight * CGFloat(i), width: (self.view.frame.width / 2.0) - buttonMargin * 2, height: playerButtonHeight))
                 var playerStatline = roster.objectAtIndex(UInt(i)) as! Statline
+                var playerButton = PlayerSelectSquare(frame: CGRect(x: buttonMargin, y: buttonMargin + playerButtonHeight * CGFloat(i), width: (self.view.frame.width / 2.0) - buttonMargin * 2, height: playerButtonHeight), statline: playerStatline)
                 
-                playerButton.tag = i + tagAdd
+                playerButton.tag = i + tagAdd // tagAdd variable prevents confusion with other tags in the view
                 playerButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("buttonPressed:")))
                 playerButton.layer.borderColor = UIColor.redColor().CGColor
                 
@@ -135,8 +139,8 @@ class GamePadViewController: UIViewController {
                     playerButton.teamBadge.textColor = UIColor.whiteColor()
                 }
                 
-                playerButton.nameLabel.text = playerStatline.owner?.name.uppercaseString
-                
+                playerButton.updateDataLabels()
+                self.playerButtonArray.append(playerButton)
                 rosterView.addSubview(playerButton)
             }
         }
@@ -145,6 +149,10 @@ class GamePadViewController: UIViewController {
     func updateViewElements() {
         self.team1ScoreLabel.text = "\(self.currentGame.tallyTeamScore(1))"
         self.team2ScoreLabel.text = "\(self.currentGame.tallyTeamScore(2))"
+        
+        for button in self.playerButtonArray {
+            button.updateDataLabels()
+        }
     }
     
     func dismissModal() {
