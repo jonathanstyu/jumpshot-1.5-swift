@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var nav3 = UINavigationController()
         var newGameScreen = NewGameViewController()
         nav3.viewControllers = [newGameScreen]
-        nav3.tabBarItem = UITabBarItem(title: "New Game", image: nil, tag: 2)
+        nav3.tabBarItem = UITabBarItem(title: "New Game", image: UIImage(named: "New-Game-Tab"), tag: 2)
 
         
         var tabs = UITabBarController()

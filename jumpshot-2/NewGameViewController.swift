@@ -112,9 +112,9 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
             var selectedPlayer = self.tableSections[indexPath.section][indexPath.row] as Player
             
             for var i = 0; i < self.tableSections[2].count; ++i {
-                if self.tableSections[2][i] == self.selectedPlayer {
+                if self.tableSections[2][i] == selectedPlayer {
                     self.tableSections[2].removeAtIndex(i)
-                    self.tableSections[1].append(self.selectedPlayer)
+                    self.tableSections[1].append(selectedPlayer)
                 }
             }
             

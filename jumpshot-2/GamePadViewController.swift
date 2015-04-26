@@ -55,7 +55,7 @@ class GamePadViewController: UIViewController {
 
 //        Container view for the scores
         self.scoreBarView = UIView()
-        self.scoreBarView.frame = CGRectMake(0, yOrigin, self.view.bounds.width / 2.0, (visibleHeight / 6.0))
+        self.scoreBarView.frame = CGRectMake(0, yOrigin, self.view.bounds.width, (visibleHeight / 8.0))
         self.scoreBarView.backgroundColor = UIColor(rgba: "#bdc3c7")
         self.view.addSubview(self.scoreBarView)
 
@@ -89,7 +89,7 @@ class GamePadViewController: UIViewController {
         
 //        Container views for the first and second teams
         self.team1View = UIView()
-        self.team1View.frame = CGRectMake(0, yOrigin + self.scoreBarView.frame.size.height, self.view.frame.width / 2.0, visibleHeight / 2.5)
+        self.team1View.frame = CGRectMake(0, yOrigin + self.scoreBarView.frame.size.height, self.view.frame.width / 2.0, visibleHeight / 2)
         self.team1View.backgroundColor = UIColor.lightGrayColor()
         self.view.addSubview(self.team1View)
         
