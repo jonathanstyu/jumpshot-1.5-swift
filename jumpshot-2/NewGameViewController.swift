@@ -54,17 +54,35 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     func setupUIElements() {
         let visibleHeight = self.view.bounds.height - self.navigationController!.navigationBar.frame.height
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addPlayer")
         var startGameButton = UIBarButtonItem(title: "Start", style: .Plain, target: self, action: "startGame:")
         var resetButton = UIBarButtonItem(title: "Reset", style: .Plain, target: self, action: "resetGame:")
         
         self.navigationItem.rightBarButtonItems = [startGameButton, resetButton]
         
+//        Set up the index bar and the headers
+        var indexBar = UIView(frame: CGRect(x: self.view.bounds.origin.x, y: self.navigationController!.navigationBar.frame.height, width: self.view.frame.width, height: 40))
+        indexBar.backgroundColor = UIColor(rgba: "#f0f0d0")
+        
+        var headerLabelTitles = ["POINTS", "REBOUNDS", "ASSISTS", "STEALS", "BLOCKS"]
+        for var i = 0; i < 5; ++i {
+            var headerLabel = UILabel()
+            headerLabel.frame = CGRect(x: (indexBar.bounds.size.width / 5.0) * CGFloat(i), y: 0, width: (indexBar.bounds.size.width / 5.0), height: indexBar.frame.size.height)
+            headerLabel.text = headerLabelTitles[i]
+            headerLabel.textColor = UIColor.blackColor()
+            headerLabel.font = UIFont(name: "Futura-CondensedMedium", size: 15.0)
+            headerLabel.textAlignment = NSTextAlignment.Center
+            indexBar.addSubview(headerLabel)
+        }
+        
         self.playersTable = UITableView()
-        self.playersTable.frame = CGRect(x: self.view.bounds.origin.x, y: self.navigationController!.navigationBar.frame.height, width: self.view.bounds.width, height: self.view.bounds.height)
+        self.playersTable.frame = CGRect(x: 0, y: 40, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
         self.playersTable.delegate = self
         self.playersTable.dataSource = self
-        self.playersTable.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "Cell")
+        self.playersTable.registerClass(PlayerTableViewCell.classForCoder(), forCellReuseIdentifier: "Cell")
         
+        
+        self.navigationController!.navigationBar.addSubview(indexBar)
         view.addSubview(playersTable)
     }
     
@@ -79,18 +97,46 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = playersTable.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
+        var cell: PlayerTableViewCell = playersTable.dequeueReusableCellWithIdentifier("Cell") as! PlayerTableViewCell
         
         let section = self.tableSections[indexPath.section]
         let selectedPlayer = section[indexPath.row] as Player
-        cell.textLabel!.text = selectedPlayer.name
+        
+        cell.bottomBar.backgroundColor = UIColor(rgba: "#8e44ad")
+        cell.nameLabel?.text = selectedPlayer.name.uppercaseString
+        
+        cell.gamesCountLabel?.text = "\(selectedPlayer.playerStatLines.count)"
+        cell.pointsAveragelabel?.text = String(format: "%.1f", selectedPlayer.averageStatistic("points"))
+        cell.reboundsAverageLabel?.text = String(format: "%.1f", selectedPlayer.averageStatistic("rebounds"))
+        cell.assistsAveragelabel?.text = String(format: "%.1f", selectedPlayer.averageStatistic("assists"))
+        cell.blocksAveragelabel?.text = String(format: "%.1f", selectedPlayer.averageStatistic("blocks"))
         
         return cell
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 55.0
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let section = self.tableSections[indexPath.section]
+        let selectedPlayer = section[indexPath.row] as Player
+        //        let navPlayer = UINavigationController()
+        let vc: PlayerProfileVC = PlayerProfileVC()
+        
+        vc.selectedPlayer = selectedPlayer
+        vc.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+        //        navPlayer.viewControllers = [vc]
+        self.presentViewController(vc, animated: true, completion: nil)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    
+//    Required for team selection
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }
     
+//    Handles the swipe and the team selection process
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         
         let team1SelectClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
@@ -159,11 +205,12 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+//    Custom header for the individual sections
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         var label : UILabel = UILabel()
         
-        label.backgroundColor = UIColor.blackColor()
+        label.backgroundColor = UIColor(rgba: "#34495e")
         
         if(section == 0){
             label.textColor = UIColor.whiteColor()
@@ -200,7 +247,40 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.tableSections[2] = self.allPlayers
         
         self.playersTable.reloadData()
+    }
+    
+    func addPlayer() {
+        var inputTextField: UITextField?
+        
+        //        Initialize the UIAlertController
+        let addItem: UIAlertController = UIAlertController(title: "New Player Name?", message: "Input their name below.", preferredStyle: .Alert)
+        
+        //        Initialize the button
+        let cancelItem: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { action -> Void in
+            
+        })
+        addItem.addAction(cancelItem)
+        
+        //        Initialize the Confirm button
+        let addItemButton: UIAlertAction = UIAlertAction(title: "Add", style: .Default, handler: { action -> Void in
+            
+            var newPlayerName: String = inputTextField!.text as String
+            Factory.createNewPlayer(newPlayerName)
+            self.playersTable.reloadData()
+            //            println("The Text here was: \(string)")
+        })
+        
+        addItem.addAction(addItemButton)
+        
+        //        Initalize the Text Field
+        addItem.addTextFieldWithConfigurationHandler { textField -> Void in
+            inputTextField = textField
+            textField.textColor = UIColor.blueColor()
+        }
+        
+        self.presentViewController(addItem, animated: true, completion: nil)
         
     }
+
 
 }

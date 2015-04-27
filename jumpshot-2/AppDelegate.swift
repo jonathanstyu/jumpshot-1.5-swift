@@ -36,12 +36,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         
         var tabs = UITabBarController()
-        tabs.viewControllers = [nav1, nav3, nav2]
+        tabs.viewControllers = [nav3, nav2]
         tabs.tabBar.barTintColor = UIColor.whiteColor()
         
         UINavigationBar.appearance().barStyle = UIBarStyle.Black
-        
-//        var swipe = SwipePageViewController()
         
         self.window!.rootViewController = tabs
         self.window?.makeKeyAndVisible()
