@@ -30,7 +30,7 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Available Players"
+        self.title = "Current Roster"
         self.numberOfCols = 5.0
         
         players = Player.allObjects()
@@ -127,12 +127,13 @@ class PlayersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedPlayer = self.players.objectAtIndex(UInt(indexPath.row)) as! Player
-        let navPlayer = UINavigationController()
+//        let navPlayer = UINavigationController()
         let vc: PlayerProfileVC = PlayerProfileVC()
         
         vc.selectedPlayer = selectedPlayer
-        navPlayer.viewControllers = [vc]
-        navigationController?.presentViewController(navPlayer, animated: true, completion: nil)
+        vc.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+//        navPlayer.viewControllers = [vc]
+        self.presentViewController(vc, animated: true, completion: nil)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     

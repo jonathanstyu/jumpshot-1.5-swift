@@ -94,6 +94,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3102D67E1AED9B5900A7D53E /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				31ABBE711A89C05F005A35B3 /* Game.swift */,
+				3197E3F31A87DBD100F846A7 /* Player.swift */,
+				31ABBE731A89C082005A35B3 /* Statline.swift */,
+				31ABBE791A8D08FC005A35B3 /* Factory.swift */,
+			);
+			name = "Data Models";
+			sourceTree = "<group>";
+		};
+		3102D67F1AED9B7B00A7D53E /* CodeSupplements */ = {
+			isa = PBXGroup;
+			children = (
+				31CBF63B1AA4BC140086C4C9 /* FrostedSidebar.swift */,
+				31EA47761A97F552000C4D89 /* AF+Date+Extension.swift */,
+				31732A0B1AE3380C00FAF369 /* UIColorExtension.swift */,
+			);
+			name = CodeSupplements;
+			sourceTree = "<group>";
+		};
+		3102D6801AED9C1400A7D53E /* Custom TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				31ABBE751A8A5E05005A35B3 /* PlayerTableViewCell.swift */,
+				31EA477E1A994DFB000C4D89 /* GameTableViewCell.swift */,
+			);
+			name = "Custom TableViewCells";
+			sourceTree = "<group>";
+		};
 		3197E3C11A87D8DB00F846A7 = {
 			isa = PBXGroup;
 			children = (
@@ -119,23 +149,17 @@
 		3197E3CC1A87D8DB00F846A7 /* jumpshot-2 */ = {
 			isa = PBXGroup;
 			children = (
-				31CBF63B1AA4BC140086C4C9 /* FrostedSidebar.swift */,
-				31EA47761A97F552000C4D89 /* AF+Date+Extension.swift */,
-				31732A0B1AE3380C00FAF369 /* UIColorExtension.swift */,
+				3102D67F1AED9B7B00A7D53E /* CodeSupplements */,
+				3102D67E1AED9B5900A7D53E /* Data Models */,
+				3102D6801AED9C1400A7D53E /* Custom TableViewCells */,
 				3197E3CF1A87D8DB00F846A7 /* AppDelegate.swift */,
-				31ABBE791A8D08FC005A35B3 /* Factory.swift */,
-				3197E3F31A87DBD100F846A7 /* Player.swift */,
-				31ABBE711A89C05F005A35B3 /* Game.swift */,
-				31ABBE731A89C082005A35B3 /* Statline.swift */,
 				31C0485D1ABDBB3A001BA4D2 /* PageViewController.swift */,
 				3197E3F11A87D9A400F846A7 /* GamesViewController.swift */,
 				3197E3EF1A87D94B00F846A7 /* PlayersViewController.swift */,
-				31CBF6391AA2237D0086C4C9 /* GamePadViewController.swift */,
+				31CBF6371A9A6BBF0086C4C9 /* PlayerProfileViewController.swift */,
 				31732A091AE3276C00FAF369 /* PlayerSelectSquare.swift */,
 				31ABBE771A8B0202005A35B3 /* NewGameViewController.swift */,
-				31ABBE751A8A5E05005A35B3 /* PlayerTableViewCell.swift */,
-				31CBF6371A9A6BBF0086C4C9 /* PlayerProfileViewController.swift */,
-				31EA477E1A994DFB000C4D89 /* GameTableViewCell.swift */,
+				31CBF6391AA2237D0086C4C9 /* GamePadViewController.swift */,
 				3197E3D61A87D8DB00F846A7 /* Images.xcassets */,
 				3197E3D81A87D8DB00F846A7 /* LaunchScreen.xib */,
 				3197E3CD1A87D8DB00F846A7 /* Supporting Files */,
