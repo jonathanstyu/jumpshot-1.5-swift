@@ -118,16 +118,17 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         return 55.0
     }
     
+//    For initializing and presenting the PlayerProfile Controller
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let section = self.tableSections[indexPath.section]
         let selectedPlayer = section[indexPath.row] as Player
-        //        let navPlayer = UINavigationController()
+        let navPlayer = UINavigationController()
         let vc: PlayerProfileVC = PlayerProfileVC()
         
         vc.selectedPlayer = selectedPlayer
-        vc.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-        //        navPlayer.viewControllers = [vc]
-        self.presentViewController(vc, animated: true, completion: nil)
+//        vc.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+        navPlayer.viewControllers = [vc]
+        self.presentViewController(navPlayer, animated: true, completion: nil)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     

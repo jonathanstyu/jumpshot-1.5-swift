@@ -19,10 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        var nav1 = UINavigationController()
-        var playersScreen = PlayersViewController()
-        nav1.viewControllers = [playersScreen]
-        nav1.tabBarItem = UITabBarItem(title: "Players", image: UIImage(named: "Jersey-Tab-Icon"), tag: 1)
+//        var nav1 = UINavigationController()
+//        var playersScreen = PlayersViewController()
+//        nav1.viewControllers = [playersScreen]
+//        nav1.tabBarItem = UITabBarItem(title: "Players", image: UIImage(named: "Jersey-Tab-Icon"), tag: 1)
         
         var nav2 = UINavigationController()
         var gamesScreen = GamesViewController()
@@ -34,9 +34,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         nav3.viewControllers = [newGameScreen]
         nav3.tabBarItem = UITabBarItem(title: "New Game", image: UIImage(named: "New-Game-Tab"), tag: 2)
 
+        var statsNav = UINavigationController()
+        var statScreen = StatsViewController()
+        statsNav.viewControllers = [statScreen]
+        statsNav.tabBarItem = UITabBarItem(title: "Stats", image: UIImage(named: "Stats-tab-icon"), tag: 2)
+        
+        var settingNav = UINavigationController()
+        var settingScreen = SettingsViewController()
+        settingNav.viewControllers = [settingScreen]
+        settingNav.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.More, tag: 2)
         
         var tabs = UITabBarController()
-        tabs.viewControllers = [nav3, nav2]
+        tabs.viewControllers = [nav3, nav2, statsNav, settingNav]
         tabs.tabBar.barTintColor = UIColor.whiteColor()
         
         UINavigationBar.appearance().barStyle = UIBarStyle.Black
