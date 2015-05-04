@@ -30,7 +30,7 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.gamesTable.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
         self.gamesTable.delegate = self
         self.gamesTable.dataSource = self
-        self.gamesTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        self.gamesTable.registerClass(GameTableViewCell.self, forCellReuseIdentifier: "Cell")
         
         view.addSubview(gamesTable)
     }
@@ -47,10 +47,18 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: UITableViewCell = gamesTable.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
+        var cell: GameTableViewCell = gamesTable.dequeueReusableCellWithIdentifier("Cell") as! GameTableViewCell
         
         let selectedGame = self.games.objectAtIndex(UInt(indexPath.row)) as! Game
-        cell.textLabel?.text = "Game played at \(selectedGame.datePlayed.toString())"
+        cell.titleLabel?.text = "Game played at \(selectedGame.datePlayed.toString())"
+        cell.team1Score.text = "\(selectedGame.tallyTeamScore(1))"
+        cell.team2Score.text = "\(selectedGame.tallyTeamScore(2))"
+        
+        if selectedGame.tallyTeamScore(1) > selectedGame.tallyTeamScore(2) {
+            cell.team1Score.backgroundColor = UIColor(rgba: "#27ae60")
+        } else if selectedGame.tallyTeamScore(1) < selectedGame.tallyTeamScore(2) {
+            cell.team2Score.backgroundColor = UIColor(rgba: "#27ae60")
+        }
         
         return cell
     }
@@ -80,6 +88,10 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
         continueGame.backgroundColor = UIColor.darkGrayColor()
         
         return [continueGame]
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 65.0
     }
 
     
