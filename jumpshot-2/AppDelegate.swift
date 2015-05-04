@@ -13,16 +13,11 @@ import Realm
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var defaults = NSUserDefaults.standardUserDefaults()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        
-//        var nav1 = UINavigationController()
-//        var playersScreen = PlayersViewController()
-//        nav1.viewControllers = [playersScreen]
-//        nav1.tabBarItem = UITabBarItem(title: "Players", image: UIImage(named: "Jersey-Tab-Icon"), tag: 1)
         
         var nav2 = UINavigationController()
         var gamesScreen = GamesViewController()
@@ -54,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         
         Factory.createTestData()
+        createDefaultSettings()
         
         return true
     }
@@ -78,6 +74,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func createDefaultSettings() {
+        self.defaults.setInteger(0, forKey: "colortheme")
     }
 
 
