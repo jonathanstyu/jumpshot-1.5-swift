@@ -24,6 +24,13 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
         setupViews()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.games = Game.allObjects()
+        self.gamesTable.reloadData()
+    }
+    
     func setupViews() {
         
         self.gamesTable = UITableView()
@@ -63,12 +70,16 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
         return cell
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    }
-    
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let actionsheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
-        let gameContinueClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
+        actionsheet.addAction(cancelAction)
+        
+        let continueGameAction = UIAlertAction(title: "Continue Game", style: .Default) { (action) -> Void in
             
             var gameToContinue = self.games[UInt(indexPath.row)] as! Game
             
@@ -80,14 +91,19 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
             
             gameNavigation.viewControllers = [newGame]
             self.navigationController?.presentViewController(gameNavigation, animated: true, completion: nil)
-
         }
         
-        var continueGame = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Continue?", handler: gameContinueClosure)
+        actionsheet.addAction(continueGameAction)
         
-        continueGame.backgroundColor = UIColor.darkGrayColor()
+        let viewGameAction = UIAlertAction(title: "View Game Stats", style: .Default) { (action) -> Void in
+            
+            var gameToContinue = self.games[UInt(indexPath.row)] as! Game
+            
+        }
         
-        return [continueGame]
+        actionsheet.addAction(viewGameAction)
+        
+        self.presentViewController(actionsheet, animated: true, completion: nil)
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
