@@ -102,7 +102,7 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         let section = self.tableSections[indexPath.section]
         let selectedPlayer = section[indexPath.row] as Player
         
-        cell.bottomBar.backgroundColor = UIColor(rgba: "#8e44ad")
+//        cell.bottomBar.backgroundColor = UIColor(rgba: "#8e44ad")
         cell.nameLabel?.text = selectedPlayer.name.uppercaseString
         
         cell.gamesCountLabel?.text = "\(selectedPlayer.playerStatLines.count)"
@@ -115,7 +115,7 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 55.0
+        return 45.0
     }
     
 //    For initializing and presenting the PlayerProfile Controller
@@ -209,21 +209,30 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
 //    Custom header for the individual sections
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        var label : UILabel = UILabel()
+        var headerView : UIView = UIView(frame: CGRectMake(0, 0, self.view.bounds.size.width, 50.0))
+        var label : UILabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, headerView.bounds.size.height / 2.0))
         
-        label.backgroundColor = UIColor(rgba: "#34495e")
+        label.font = UIFont(name: "ArialRoundedMTBold", size: 15.0)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        label.textAlignment = NSTextAlignment.Center
         
         if(section == 0){
+            headerView.backgroundColor = UIColor(rgba: "#27ae60")
             label.textColor = UIColor.whiteColor()
             label.text = "Team 1"
         } else if (section == 1){
+            headerView.backgroundColor = UIColor(rgba: "#34495e")
             label.textColor = UIColor.orangeColor()
             label.text = "Team 2"
         } else {
-            label.textColor = UIColor.whiteColor()
+            headerView.backgroundColor = UIColor(rgba: "#95a5a6")
+            label.textColor = UIColor.blackColor()
             label.text = "Unchosen"
         }
-        return label
+        
+        headerView.addSubview(label)
+        return headerView
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
