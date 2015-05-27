@@ -70,7 +70,7 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
             headerLabel.frame = CGRect(x: (indexBar.bounds.size.width / 5.0) * CGFloat(i), y: 0, width: (indexBar.bounds.size.width / 5.0), height: indexBar.frame.size.height)
             headerLabel.text = headerLabelTitles[i]
             headerLabel.textColor = UIColor.blackColor()
-            headerLabel.font = UIFont(name: "Futura-CondensedMedium", size: 15.0)
+            headerLabel.font = UIFont(name: "ArialRoundedMTBold", size: 12.0)
             headerLabel.textAlignment = NSTextAlignment.Center
             indexBar.addSubview(headerLabel)
         }

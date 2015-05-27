@@ -55,5 +55,16 @@ class Player: RLMObject {
         }
     }
     
+    class func allPlayers() -> [Player] {
+        var results = Player.allObjects() as RLMResults
+        var export: [Player] = []
+        
+        for var i = 0; i < Int(results.count); ++i {
+            export.append(results.objectAtIndex(UInt(i)) as! Player)
+        }
+        
+        return export
+    }
+    
     
 }
