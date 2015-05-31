@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		315EEF751B1BC61B000F8044 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315EEF741B1BC61B000F8044 /* Theme.swift */; };
+		315EEF771B1BC929000F8044 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315EEF761B1BC929000F8044 /* NavigationController.swift */; };
 		31732A0A1AE3276C00FAF369 /* PlayerSelectSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31732A091AE3276C00FAF369 /* PlayerSelectSquare.swift */; };
 		31732A0C1AE3380C00FAF369 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31732A0B1AE3380C00FAF369 /* UIColorExtension.swift */; };
 		3197E3D01A87D8DB00F846A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197E3CF1A87D8DB00F846A7 /* AppDelegate.swift */; };
@@ -46,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		315EEF741B1BC61B000F8044 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		315EEF761B1BC929000F8044 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		31732A091AE3276C00FAF369 /* PlayerSelectSquare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerSelectSquare.swift; sourceTree = "<group>"; };
 		31732A0B1AE3380C00FAF369 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		31927DDA1B1A72D400E67A68 /* bridging-header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "bridging-header.h"; sourceTree = "<group>"; };
@@ -109,6 +113,7 @@
 				3197E3F31A87DBD100F846A7 /* Player.swift */,
 				31ABBE731A89C082005A35B3 /* Statline.swift */,
 				31ABBE791A8D08FC005A35B3 /* Factory.swift */,
+				315EEF741B1BC61B000F8044 /* Theme.swift */,
 			);
 			name = "Data Models";
 			sourceTree = "<group>";
@@ -123,13 +128,15 @@
 			name = CodeSupplements;
 			sourceTree = "<group>";
 		};
-		3102D6801AED9C1400A7D53E /* Custom TableViewCells */ = {
+		3102D6801AED9C1400A7D53E /* Custom Components */ = {
 			isa = PBXGroup;
 			children = (
 				31ABBE751A8A5E05005A35B3 /* PlayerTableViewCell.swift */,
 				31EA477E1A994DFB000C4D89 /* GameTableViewCell.swift */,
+				315EEF761B1BC929000F8044 /* NavigationController.swift */,
+				31732A091AE3276C00FAF369 /* PlayerSelectSquare.swift */,
 			);
-			name = "Custom TableViewCells";
+			name = "Custom Components";
 			sourceTree = "<group>";
 		};
 		3197E3C11A87D8DB00F846A7 = {
@@ -162,10 +169,9 @@
 			children = (
 				3102D67F1AED9B7B00A7D53E /* CodeSupplements */,
 				3102D67E1AED9B5900A7D53E /* Data Models */,
-				3102D6801AED9C1400A7D53E /* Custom TableViewCells */,
+				3102D6801AED9C1400A7D53E /* Custom Components */,
 				31B9402B1AEFDAFD00174559 /* ViewControllers */,
 				3197E3CF1A87D8DB00F846A7 /* AppDelegate.swift */,
-				31732A091AE3276C00FAF369 /* PlayerSelectSquare.swift */,
 				3197E3D61A87D8DB00F846A7 /* Images.xcassets */,
 				3197E3D81A87D8DB00F846A7 /* LaunchScreen.xib */,
 				3197E3CD1A87D8DB00F846A7 /* Supporting Files */,
@@ -381,7 +387,9 @@
 				31732A0A1AE3276C00FAF369 /* PlayerSelectSquare.swift in Sources */,
 				31EA476F1A97E786000C4D89 /* RLMSupport.swift in Sources */,
 				3197E3F21A87D9A400F846A7 /* GamesViewController.swift in Sources */,
+				315EEF751B1BC61B000F8044 /* Theme.swift in Sources */,
 				31EA477F1A994DFB000C4D89 /* GameTableViewCell.swift in Sources */,
+				315EEF771B1BC929000F8044 /* NavigationController.swift in Sources */,
 				31B9402A1AEFD2E700174559 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

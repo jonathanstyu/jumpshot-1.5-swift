@@ -90,7 +90,7 @@ class GamesViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNEm
             
             var gameToContinue = self.games[UInt(indexPath.row)] as! Game
             
-            let gameNavigation = UINavigationController()
+            let gameNavigation = NavigationController()
             let newGame: GamePadViewController = GamePadViewController()
             
             newGame.currentGame = gameToContinue

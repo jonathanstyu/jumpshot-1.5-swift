@@ -19,11 +19,10 @@ class SettingsViewController: UITableViewController {
         super.viewDidLoad()
         
         self.title = "Set Preferences"
-        self.items = [["3 Pointers Allowed", "Uneven Teams Allowed"],["Blue/Black [default]","Purple/Gold", "Blue/White", "Black/White"], ["Created with love by Jonathan Yu. This app uses the following plugins:", "FrostedSideBar", "AFDateExtension", "UIColorExtension"]]
+        self.items = [["3 Pointers Allowed", "Uneven Teams Allowed"],["Blue/Black [default]","Purple/Gold", "Blue/White", "Black/White"], ["Created with love by Jonathan Yu. This app uses the following plugins:", "FrostedSideBar", "AFDateExtension", "UIColorExtension", "DZNEmptyDataSet"]]
         tableView = UITableView(frame: tableView.frame, style: .Grouped)
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
-//        self.view.addSubview(self.settingsTable)
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
