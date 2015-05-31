@@ -10,13 +10,18 @@ import Foundation
 import UIKit
 import Realm
 
-class PlayerRankViewController: UITableViewController {
+class PlayerRankViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     var allPlayers: [Player]!
     var headerLabelTitles: [String] = ["points", "rebounds", "assists", "steals", "blocks"]
     
     override func viewDidLoad() {
+        self.title = "Statistics"
         allPlayers = Player.allPlayers()
         tableView = UITableView(frame: tableView.frame, style: .Plain)
+        
+        self.tableView.emptyDataSetDelegate = self
+        self.tableView.emptyDataSetSource = self
+        self.tableView.tableFooterView = UIView.new()
         tableView.registerClass(PlayerTableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
@@ -35,6 +40,15 @@ class PlayerRankViewController: UITableViewController {
         cell.blocksAveragelabel?.text = String(format: "%.1f", selectedPlayer.averageStatistic("blocks"))
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let selectedPlayer = allPlayers[indexPath.row] as Player
+        let vc: PlayerProfileVC = PlayerProfileVC()
+        
+        vc.selectedPlayer = selectedPlayer
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -92,5 +106,24 @@ class PlayerRankViewController: UITableViewController {
         
         tableView.reloadData()
     }
+    
+//    For the empty data set condition
+    deinit {
+        self.tableView.emptyDataSetSource = nil
+        self.tableView.emptyDataSetDelegate = nil
+    }
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "No Players Here.", attributes: nil)
+    }
+    
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "Confused")
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "When you add a player, they will appear here.", attributes: nil)
+    }
+
     
 }

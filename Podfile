@@ -1,6 +1,7 @@
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.3'
+xcodeproj 'jumpshot-2'
 
-target "jumpshot-2" do
-    pod "FLEX"
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'jumpshot-2' do
+    pod 'DZNEmptyDataSet'
 end

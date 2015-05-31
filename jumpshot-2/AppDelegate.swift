@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         nav3.tabBarItem = UITabBarItem(title: "New Game", image: UIImage(named: "New-Game-Tab"), tag: 2)
 
         var statsNav = UINavigationController()
-        var statScreen = StatsViewController()
+        var statScreen = PlayerRankViewController()
         statsNav.viewControllers = [statScreen]
         statsNav.tabBarItem = UITabBarItem(title: "Stats", image: UIImage(named: "Stats-tab-icon"), tag: 2)
         
@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.rootViewController = tabs
         self.window?.makeKeyAndVisible()
         
-        Factory.createTestData()
+//        Factory.createTestData()
         createDefaultSettings()
         
         return true

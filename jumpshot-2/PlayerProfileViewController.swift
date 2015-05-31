@@ -31,7 +31,6 @@ class PlayerProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func setupViews() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "dismissModal")
         
         self.containerView = UIView()
         self.containerView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: (self.view.bounds.size.height * 0.33))
@@ -43,14 +42,6 @@ class PlayerProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         nameLabel.backgroundColor = UIColor(rgba: "#f9f7cc")
         nameLabel.textColor = UIColor.blackColor()
         nameLabel.text = selectedPlayer.name.capitalizedString
-
-//        Removing the dimiss button for now. Not necessary
-//        let dismissButton = UIButton()
-//        dismissButton.frame = CGRect(x: self.view.bounds.size.width * 0.6, y: nameLabel.bounds.size.height + 5, width: self.view.bounds.size.width * 0.38, height: 35)
-//        dismissButton.backgroundColor = UIColor(rgba: "#e74c3c")
-//        dismissButton.layer.cornerRadius = 5
-//        dismissButton.setTitle("Dismiss", forState: UIControlState.Normal)
-//        dismissButton.addTarget(self, action: "dismissModal", forControlEvents: UIControlEvents.TouchUpInside)
         
 //        Index bar + the composition texts
         var indexBar = UIView(frame: CGRect(x: 0, y: self.containerView.frame.size.height - 40, width: self.view.frame.width, height: 40))
@@ -84,11 +75,7 @@ class PlayerProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         view.addSubview(self.gamesTable)
 
-    }
-    
-    func dismissModal() {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
+    }    
     
 //    UITableView necessary 
     

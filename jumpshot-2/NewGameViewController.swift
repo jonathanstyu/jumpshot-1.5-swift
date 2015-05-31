@@ -10,12 +10,10 @@ import Foundation
 import UIKit
 import Realm
 
-class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class NewGameViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
 
     var playersRaw: RLMResults!
     var selectedPlayer: Player!
-    
-    var playersTable: UITableView!
     
     var startGameButton: UIBarButtonItem!
     var resetButton: UIBarButtonItem!
@@ -29,7 +27,7 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var tableSections: [[Player]]!
     
-    let kMargin: CGFloat = (1.0/12.0)
+    var headerLabelTitles: [String] = ["points", "rebounds", "assists", "steals", "blocks"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,9 +44,20 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.team1 = []
         self.team2 = []
         
+        self.tableView.emptyDataSetDelegate = self
+        self.tableView.emptyDataSetSource = self
+//        self.tableView.tableFooterView = UIView.new()
+        
         self.tableSections = [self.team1, self.team2, self.allPlayers]
         
         setupUIElements()
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
     }
     
     func setupUIElements() {
@@ -75,29 +84,24 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
             indexBar.addSubview(headerLabel)
         }
         
-        self.playersTable = UITableView()
-        self.playersTable.frame = CGRect(x: 0, y: 40, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
-        self.playersTable.delegate = self
-        self.playersTable.dataSource = self
-        self.playersTable.registerClass(PlayerTableViewCell.classForCoder(), forCellReuseIdentifier: "Cell")
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.registerClass(PlayerTableViewCell.classForCoder(), forCellReuseIdentifier: "Cell")
         
-        
-        self.navigationController!.navigationBar.addSubview(indexBar)
-        view.addSubview(playersTable)
     }
     
 //    Required for table
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.tableSections.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Int(self.tableSections[section].count)
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: PlayerTableViewCell = playersTable.dequeueReusableCellWithIdentifier("Cell") as! PlayerTableViewCell
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell: PlayerTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell") as! PlayerTableViewCell
         
         let section = self.tableSections[indexPath.section]
         let selectedPlayer = section[indexPath.row] as Player
@@ -114,31 +118,21 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 45.0
     }
     
 //    For initializing and presenting the PlayerProfile Controller
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let section = self.tableSections[indexPath.section]
-        let selectedPlayer = section[indexPath.row] as Player
-        let navPlayer = UINavigationController()
-        let vc: PlayerProfileVC = PlayerProfileVC()
-        
-        vc.selectedPlayer = selectedPlayer
-//        vc.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-        navPlayer.viewControllers = [vc]
-        self.presentViewController(navPlayer, animated: true, completion: nil)
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     
-//    Required for team selection
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//    Handles the swipe and the team selection process
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }
     
-//    Handles the swipe and the team selection process
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         
         let team1SelectClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
             
@@ -207,7 +201,7 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
 //    Custom header for the individual sections
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         var headerView : UIView = UIView(frame: CGRectMake(0, 0, self.view.bounds.size.width, 50.0))
         var label : UILabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, headerView.bounds.size.height / 2.0))
@@ -235,8 +229,19 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         return headerView
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 25
+    }
+    
+//    For the empty data set state
+    
+    deinit {
+        self.tableView.emptyDataSetSource = nil
+        self.tableView.emptyDataSetDelegate = nil
+    }
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "No Players Here.", attributes: nil)
     }
     
 //    IBActions
@@ -256,7 +261,7 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.tableSections[1].removeAll(keepCapacity: true)
         self.tableSections[2] = self.allPlayers
         
-        self.playersTable.reloadData()
+        self.tableView.reloadData()
     }
     
     func addPlayer() {
@@ -276,8 +281,6 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             var newPlayerName: String = inputTextField!.text as String
             Factory.createNewPlayer(newPlayerName)
-            self.playersTable.reloadData()
-            //            println("The Text here was: \(string)")
         })
         
         addItem.addAction(addItemButton)

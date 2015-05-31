@@ -10,9 +10,7 @@ import Foundation
 import UIKit
 import Realm
 
-class GamesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    var gamesTable: UITableView!
+class GamesViewController: UITableViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
     var games: RLMResults!
     var selectedGame: Game!
@@ -21,40 +19,49 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         self.title = "Games"
         self.games = Game.allObjects()
-        setupViews()
+        
+        self.tableView.emptyDataSetDelegate = self
+        self.tableView.emptyDataSetSource = self
+        self.tableView.registerClass(GameTableViewCell.self, forCellReuseIdentifier: "Cell")
+        self.tableView.tableFooterView = UIView.new()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
         self.games = Game.allObjects()
-        self.gamesTable.reloadData()
+        self.tableView.reloadData()
     }
     
-    func setupViews() {
-        
-        self.gamesTable = UITableView()
-        self.gamesTable.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
-        self.gamesTable.delegate = self
-        self.gamesTable.dataSource = self
-        self.gamesTable.registerClass(GameTableViewCell.self, forCellReuseIdentifier: "Cell")
-        
-        view.addSubview(gamesTable)
+    deinit {
+        self.tableView.emptyDataSetSource = nil
+        self.tableView.emptyDataSetDelegate = nil
     }
     
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "No Games Here.", attributes: nil)
+    }
+    
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "Confused")
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "When you play a game, it will appear here.", attributes: nil)
+    }
     
     //    Required for table
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Int(games.count)
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: GameTableViewCell = gamesTable.dequeueReusableCellWithIdentifier("Cell") as! GameTableViewCell
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell: GameTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell") as! GameTableViewCell
         
         let selectedGame = self.games.objectAtIndex(UInt(indexPath.row)) as! Game
         cell.titleLabel?.text = "Game played at \(selectedGame.datePlayed.toString())"
@@ -70,7 +77,7 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let actionsheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
@@ -106,7 +113,7 @@ class GamesViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.presentViewController(actionsheet, animated: true, completion: nil)
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 65.0
     }
 
