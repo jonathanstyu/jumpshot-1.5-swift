@@ -28,8 +28,6 @@ class GamePadViewController: UIViewController, UITableViewDelegate, UITableViewD
     var pauseButton: UIButton!
     
     var feedTable: UITableView!
-
-    let kMargin: CGFloat = (1.0/12.0)
     
     var statlineToModify: Statline!
     
@@ -173,6 +171,7 @@ class GamePadViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func buttonPressed(gesture: UITapGestureRecognizer) {
         var sender: UIView = gesture.view!
+        var teamNumber: Int!
         
         var frostedSideBar: FrostedSidebar = FrostedSidebar(itemImages: [
             UIImage(named: "FG")!,
@@ -186,10 +185,12 @@ class GamePadViewController: UIViewController, UITableViewDelegate, UITableViewD
 //        Right or Left team?
         if Int(sender.tag % 200) >= 100 {
 //            Team 1
+            teamNumber = 2
             self.statlineToModify = self.currentGame.team2_players.objectAtIndex(UInt(sender.tag - 300)) as! Statline
             frostedSideBar.showFromRight = false
         } else {
 //            Team 2
+            teamNumber = 1
             self.statlineToModify = self.currentGame.team1_players.objectAtIndex(UInt(sender.tag - 200)) as! Statline
             frostedSideBar.showFromRight = true
         }
@@ -209,10 +210,12 @@ class GamePadViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 fgMakeMissBar.actionForIndex = [
                     0: {self.statlineToModify.statChange("fgMade")
+                        FeedEvent.createFeedEvent("fgMade", statline: self.statlineToModify, team: teamNumber)
                         fgMakeMissBar.dismissAnimated(true, completion: nil)
                         self.updateViewElements()
                     },
                     1: {self.statlineToModify.statChange("fgMiss")
+                        FeedEvent.createFeedEvent("fgMade", statline: self.statlineToModify, team: teamNumber)
                         fgMakeMissBar.dismissAnimated(true, completion: nil)
                         self.updateViewElements()
                     }
@@ -234,10 +237,12 @@ class GamePadViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 fgMakeMissBar.actionForIndex = [
                     0: {self.statlineToModify.statChange("3fgMade")
+                        FeedEvent.createFeedEvent("3fgMade", statline: self.statlineToModify, team: teamNumber)
                         fgMakeMissBar.dismissAnimated(true, completion: nil)
                         self.updateViewElements()
                     },
                     1: {self.statlineToModify.statChange("3fgMiss")
+                        FeedEvent.createFeedEvent("3fgMiss", statline: self.statlineToModify, team: teamNumber)
                         fgMakeMissBar.dismissAnimated(true, completion: nil)
                         self.updateViewElements()
                     }
@@ -247,22 +252,26 @@ class GamePadViewController: UIViewController, UITableViewDelegate, UITableViewD
             },
             2: {
                 self.statlineToModify.statChange("rebound")
+                FeedEvent.createFeedEvent("rebound", statline: self.statlineToModify, team: teamNumber)
                 frostedSideBar.dismissAnimated(true, completion: nil)
                 self.updateViewElements()
                 
             },
             3: {
                 self.statlineToModify.statChange("assist")
+                FeedEvent.createFeedEvent("assist", statline: self.statlineToModify, team: teamNumber)
                 frostedSideBar.dismissAnimated(true, completion: nil)
                 self.updateViewElements()
             },
             4: {
                 self.statlineToModify.statChange("steal")
+                FeedEvent.createFeedEvent("steal", statline: self.statlineToModify, team: teamNumber)
                 frostedSideBar.dismissAnimated(true, completion: nil)
                 self.updateViewElements()
             },
             5: {
                 self.statlineToModify.statChange("block")
+                FeedEvent.createFeedEvent("block", statline: self.statlineToModify, team: teamNumber)
                 frostedSideBar.dismissAnimated(true, completion: nil)
                 self.updateViewElements()
             }
@@ -309,6 +318,25 @@ class GamePadViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell!.detailTextLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 11.0)
         cell!.detailTextLabel?.text = currentEventFeed.time.toString(format: .Custom("HH:mm:ss"))
         
+//        Adds a badge for team 1 or two
+        var accessoryBadge = UILabel()
+        var string = "Team \(currentEventFeed.team)"
+        accessoryBadge.text = string
+        if currentEventFeed.team == 1 {
+            accessoryBadge.textColor = UIColor.whiteColor()
+            accessoryBadge.backgroundColor = UIColor(rgba: "#690375")
+        } else {
+            accessoryBadge.textColor = UIColor.blackColor()
+            accessoryBadge.backgroundColor = UIColor(rgba: "#8FC0A9")
+        }
+        accessoryBadge.font = UIFont(name: "ArialRoundedMTBold", size: 10)
+        accessoryBadge.textAlignment = NSTextAlignment.Center
+        accessoryBadge.layer.cornerRadius = 4
+        accessoryBadge.clipsToBounds = true
+        
+        accessoryBadge.frame = CGRectMake(cell!.contentView.frame.width * 0.9, cell!.contentView.frame.height * 0.2, 50, cell!.contentView.frame.height * 0.4)
+        cell!.contentView.addSubview(accessoryBadge)
+        
         return cell!
     }
     
@@ -316,6 +344,7 @@ class GamePadViewController: UIViewController, UITableViewDelegate, UITableViewD
         return 35
     }
     
+//    Creates the header. Note that heightforheader also necessary
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         var indexBar = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 35))
@@ -330,5 +359,9 @@ class GamePadViewController: UIViewController, UITableViewDelegate, UITableViewD
         indexBar.addSubview(headerLabel)
      
         return indexBar
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 35
     }
 }

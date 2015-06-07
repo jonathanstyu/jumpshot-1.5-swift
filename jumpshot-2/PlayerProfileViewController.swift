@@ -20,6 +20,8 @@ class PlayerProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     var backButton: UIButton!
     
+    var headerLabelTitles: [String] = ["points", "rebounds", "assists", "steals", "blocks"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,22 +45,6 @@ class PlayerProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         nameLabel.textColor = UIColor.blackColor()
         nameLabel.text = selectedPlayer.name.capitalizedString
         
-//        Index bar + the composition texts
-        var indexBar = UIView(frame: CGRect(x: 0, y: self.containerView.frame.size.height - 40, width: self.view.frame.width, height: 40))
-        indexBar.backgroundColor = UIColor(rgba: "#f0f0d0")
-        
-        var headerLabelTitles = ["POINTS", "REBOUNDS", "ASSISTS", "STEALS", "BLOCKS"]
-        for var i = 0; i < 5; ++i {
-            var headerLabel = UILabel()
-            headerLabel.frame = CGRect(x: (indexBar.bounds.size.width / 5.0) * CGFloat(i), y: 0, width: (indexBar.bounds.size.width / 5.0), height: indexBar.frame.size.height)
-            headerLabel.text = headerLabelTitles[i]
-            headerLabel.textColor = UIColor.blackColor()
-            headerLabel.font = UIFont(name: "Futura-CondensedMedium", size: 15.0)
-            headerLabel.textAlignment = NSTextAlignment.Center
-            indexBar.addSubview(headerLabel)
-        }
-        
-        self.containerView.addSubview(indexBar)
         self.containerView.addSubview(nameLabel)
 //        self.containerView.addSubview(dismissButton)
         view.addSubview(self.containerView)
@@ -97,6 +83,39 @@ class PlayerProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 
         return cell
     }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        var indexBar = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+        indexBar.backgroundColor = UIColor(rgba: "#f0f0d0")
+        
+        for var i = 0; i < 5; ++i {
+            var headerContainView = UIView()
+            var headerLabel = UILabel()
+            
+            
+            headerContainView.frame = CGRect(x: (indexBar.bounds.size.width / 5.0) * CGFloat(i), y: 0, width: (indexBar.bounds.size.width / 5.0), height: indexBar.frame.size.height)
+            headerLabel.frame = CGRectMake(0, 0, headerContainView.bounds.size.width, headerContainView.bounds.size.height)
+            
+            headerLabel.text = headerLabelTitles[i].uppercaseString
+            headerLabel.textColor = UIColor.blackColor()
+            headerLabel.font = UIFont(name: "ArialRoundedMTBold", size: 12.0)
+            headerLabel.textAlignment = NSTextAlignment.Center
+            
+            headerContainView.tag = i
+            headerContainView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("headerTapped:")))
+            
+            headerContainView.addSubview(headerLabel)
+            indexBar.addSubview(headerContainView)
+        }
+        
+        return indexBar
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 65.0

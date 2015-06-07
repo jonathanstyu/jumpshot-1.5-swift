@@ -13,10 +13,13 @@ import Realm
 class FeedEvent: RLMObject {
     dynamic var text = ""
     dynamic var time = NSDate()
+    dynamic var team = 0
     
-    class func createFeedEvent(event: String, statline: Statline) -> FeedEvent {
+    class func newFeedEvent(event: String, statline: Statline, team: Int) -> FeedEvent {
         var feed = FeedEvent()
         var relevantPlayer: Player = statline.owner!
+        
+        feed.team = team
         feed.text = "\(relevantPlayer.name as String)"
         
         switch event {
@@ -43,5 +46,14 @@ class FeedEvent: RLMObject {
         }
         
         return feed
+    }
+    
+    class func createFeedEvent(event: String, statline: Statline, team: Int) -> Void {
+        var feed = FeedEvent.newFeedEvent(event, statline: statline, team: team)
+        let realm = RLMRealm.defaultRealm()
+        
+        realm.beginWriteTransaction()
+        statline.game?.eventFeed.insertObject(feed, atIndex: 0)
+        realm.commitWriteTransaction()
     }
 }

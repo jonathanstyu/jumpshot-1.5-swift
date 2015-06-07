@@ -53,8 +53,7 @@ class Factory {
             player.playerStatLines.addObject(newStatline)
             newGame.team1_players.addObject(newStatline)
             
-            let newFeedEvent = FeedEvent.createFeedEvent("hello", statline: newStatline)
-            newGame.eventFeed.addObject(newFeedEvent)
+            newGame.eventFeed.addObject(FeedEvent.newFeedEvent("rebound", statline: newStatline, team: 1))
             
             realm.addObject(newStatline)
         }
@@ -66,8 +65,7 @@ class Factory {
             player.playerStatLines.addObject(newStatline)
             newGame.team2_players.addObject(newStatline)
             
-            let newFeedEvent = FeedEvent.createFeedEvent("hello", statline: newStatline)
-            newGame.eventFeed.addObject(newFeedEvent)
+            newGame.eventFeed.addObject(FeedEvent.newFeedEvent("rebound", statline: newStatline, team: 2))
             
             realm.addObject(newStatline)
         }
