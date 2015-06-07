@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Realm
 
-class GamePadViewController: UIViewController {
+class GamePadViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var currentGame: Game!
     
     var scoreBarView: UIView!
@@ -26,6 +26,8 @@ class GamePadViewController: UIViewController {
     var restartButton: UIButton!
     var stopButton: UIButton!
     var pauseButton: UIButton!
+    
+    var feedTable: UITableView!
 
     let kMargin: CGFloat = (1.0/12.0)
     
@@ -97,6 +99,14 @@ class GamePadViewController: UIViewController {
         self.team2View.frame = CGRectMake(self.view.frame.width / 2.0, yOrigin + self.scoreBarView.frame.height, self.view.frame.width / 2.0, self.team1View.frame.size.height)
         self.team2View.backgroundColor = UIColor.yellowColor()
         self.view.addSubview(self.team2View)
+        
+//        Set up the UITable for the Feed
+        self.feedTable = UITableView()
+        self.feedTable.frame = CGRectMake(0, yOrigin + self.scoreBarView.frame.size.height + self.team1View.frame.size.height, self.view.frame.width, visibleHeight/4.0)
+        self.feedTable.dataSource = self
+        self.feedTable.delegate = self
+        self.feedTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        self.view.addSubview(self.feedTable)
        
     }
     
@@ -146,10 +156,12 @@ class GamePadViewController: UIViewController {
         }
     }
     
+//    Refreshing the entire view after something happens to the viewcontroller
     func updateViewElements() {
         self.team1ScoreLabel.text = "\(self.currentGame.tallyTeamScore(1))"
         self.team2ScoreLabel.text = "\(self.currentGame.tallyTeamScore(2))"
         
+        self.feedTable.reloadData()
         for button in self.playerButtonArray {
             button.updateDataLabels()
         }
@@ -234,21 +246,24 @@ class GamePadViewController: UIViewController {
                 fgMakeMissBar.showInViewController(self, animated: true)
             },
             2: {
-                println(self.statlineToModify)
-                self.statlineToModify.statChange("3fgMiss")
+                self.statlineToModify.statChange("rebound")
+                frostedSideBar.dismissAnimated(true, completion: nil)
                 self.updateViewElements()
                 
             },
             3: {
                 self.statlineToModify.statChange("assist")
+                frostedSideBar.dismissAnimated(true, completion: nil)
                 self.updateViewElements()
             },
             4: {
                 self.statlineToModify.statChange("steal")
+                frostedSideBar.dismissAnimated(true, completion: nil)
                 self.updateViewElements()
             },
             5: {
                 self.statlineToModify.statChange("block")
+                frostedSideBar.dismissAnimated(true, completion: nil)
                 self.updateViewElements()
             }
         ]
@@ -256,10 +271,6 @@ class GamePadViewController: UIViewController {
         frostedSideBar.showInViewController(self, animated: true)
     }
     
-//    2nd Level Make-Miss Bar
-//    func generateMakeMissBar(showRight: Bool, twoShot: Bool) -> FrostedSidebar {
-//        
-//    }
     
 //    Timing buttons. Implement?
     func stopButtonPressed(sender: UIButton) {
@@ -272,5 +283,52 @@ class GamePadViewController: UIViewController {
 
     func restartButtonPressed(sender: UIButton) {
         println("restart button clicked!")
+    }
+    
+//    Necessary for TableView
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Int(currentGame.eventFeed.count)
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell: UITableViewCell? = feedTable.dequeueReusableCellWithIdentifier("Cell") as? UITableViewCell
+        var currentEventFeed: FeedEvent = currentGame.eventFeed.objectAtIndex(UInt(indexPath.row)) as! FeedEvent
+        
+        if (cell != nil) {
+            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "Cell")
+        }
+        
+        cell!.textLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 13.0)
+        cell!.textLabel?.text = currentEventFeed.text
+        
+        cell!.detailTextLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 11.0)
+        cell!.detailTextLabel?.text = currentEventFeed.time.toString(format: .Custom("HH:mm:ss"))
+        
+        return cell!
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 35
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        var indexBar = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 35))
+        indexBar.backgroundColor = UIColor(rgba: "#f0f0d0")
+        
+        var headerLabel = UILabel()
+        headerLabel.frame = CGRect(x: 0, y: 0, width: (indexBar.bounds.size.width), height: indexBar.frame.size.height)
+        headerLabel.text = "Game Feed"
+        headerLabel.textColor = UIColor.blackColor()
+        headerLabel.font = UIFont(name: "ArialRoundedMTBold", size: 16.0)
+        headerLabel.textAlignment = NSTextAlignment.Center
+        indexBar.addSubview(headerLabel)
+     
+        return indexBar
     }
 }

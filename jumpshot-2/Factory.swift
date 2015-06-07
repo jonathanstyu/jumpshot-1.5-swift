@@ -46,10 +46,15 @@ class Factory {
         
         for player in t1 {
             let newStatline = Factory.createRandoStatline()
+            
             newStatline.owner = player
             newStatline.game = newGame
+            
             player.playerStatLines.addObject(newStatline)
             newGame.team1_players.addObject(newStatline)
+            
+            let newFeedEvent = FeedEvent.createFeedEvent("hello", statline: newStatline)
+            newGame.eventFeed.addObject(newFeedEvent)
             
             realm.addObject(newStatline)
         }
@@ -60,6 +65,9 @@ class Factory {
             newStatline.game = newGame
             player.playerStatLines.addObject(newStatline)
             newGame.team2_players.addObject(newStatline)
+            
+            let newFeedEvent = FeedEvent.createFeedEvent("hello", statline: newStatline)
+            newGame.eventFeed.addObject(newFeedEvent)
             
             realm.addObject(newStatline)
         }

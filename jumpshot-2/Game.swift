@@ -16,6 +16,8 @@ class Game: RLMObject {
     dynamic var team1_players = RLMArray(objectClassName: "Statline")
     dynamic var team2_players = RLMArray(objectClassName: "Statline")
     
+    dynamic var eventFeed = RLMArray(objectClassName: "FeedEvent")
+    
     func tallyTeamScore(team: Int) -> Int {
         var totalScore: Int = 0
         

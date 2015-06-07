@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		315EEF751B1BC61B000F8044 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315EEF741B1BC61B000F8044 /* Theme.swift */; };
 		315EEF771B1BC929000F8044 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315EEF761B1BC929000F8044 /* NavigationController.swift */; };
+		315EEF791B1BD4CD000F8044 /* FeedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315EEF781B1BD4CD000F8044 /* FeedEvent.swift */; };
 		31732A0A1AE3276C00FAF369 /* PlayerSelectSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31732A091AE3276C00FAF369 /* PlayerSelectSquare.swift */; };
 		31732A0C1AE3380C00FAF369 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31732A0B1AE3380C00FAF369 /* UIColorExtension.swift */; };
 		3197E3D01A87D8DB00F846A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197E3CF1A87D8DB00F846A7 /* AppDelegate.swift */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		315EEF741B1BC61B000F8044 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		315EEF761B1BC929000F8044 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		315EEF781B1BD4CD000F8044 /* FeedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedEvent.swift; sourceTree = "<group>"; };
 		31732A091AE3276C00FAF369 /* PlayerSelectSquare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerSelectSquare.swift; sourceTree = "<group>"; };
 		31732A0B1AE3380C00FAF369 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		31927DDA1B1A72D400E67A68 /* bridging-header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "bridging-header.h"; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				3197E3F31A87DBD100F846A7 /* Player.swift */,
 				31ABBE731A89C082005A35B3 /* Statline.swift */,
 				31ABBE791A8D08FC005A35B3 /* Factory.swift */,
+				315EEF781B1BD4CD000F8044 /* FeedEvent.swift */,
 				315EEF741B1BC61B000F8044 /* Theme.swift */,
 			);
 			name = "Data Models";
@@ -385,6 +388,7 @@
 				31ABBE761A8A5E05005A35B3 /* PlayerTableViewCell.swift in Sources */,
 				31CBF6381A9A6BBF0086C4C9 /* PlayerProfileViewController.swift in Sources */,
 				31732A0A1AE3276C00FAF369 /* PlayerSelectSquare.swift in Sources */,
+				315EEF791B1BD4CD000F8044 /* FeedEvent.swift in Sources */,
 				31EA476F1A97E786000C4D89 /* RLMSupport.swift in Sources */,
 				3197E3F21A87D9A400F846A7 /* GamesViewController.swift in Sources */,
 				315EEF751B1BC61B000F8044 /* Theme.swift in Sources */,

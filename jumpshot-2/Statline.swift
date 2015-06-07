@@ -42,6 +42,7 @@ class Statline: RLMObject {
     
     func statChange(event: String) -> Void {
         let realm = RLMRealm.defaultRealm()
+        let relevantFeedEvent: FeedEvent = FeedEvent.createFeedEvent(event, statline: self)
         
         realm.beginWriteTransaction()
         switch event {
@@ -68,6 +69,8 @@ class Statline: RLMObject {
         default:
             self.points += 0
         }
+        
+        self.game?.eventFeed.insertObject(relevantFeedEvent, atIndex: 0)
         realm.commitWriteTransaction()
     }
     

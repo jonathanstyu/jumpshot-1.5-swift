@@ -24,9 +24,6 @@ class Player: RLMObject {
         for var lineIndex = 0; lineIndex < Int(self.playerStatLines.count); ++lineIndex {
             var selectedStatLine = self.playerStatLines.objectAtIndex(UInt(lineIndex)) as! Statline
             
-//            println(sum)
-//            println(selectedStatLine.statCall("points"))
-            
             switch statistic {
                 case "points":
                 sum += selectedStatLine.points
@@ -40,6 +37,14 @@ class Player: RLMObject {
                 sum += selectedStatLine.blocks
                 case "turnovers":
                 sum += selectedStatLine.turnovers
+                case "fgMade":
+                sum += selectedStatLine.fieldGoalsMade
+                case "fgMiss":
+                sum += selectedStatLine.fieldGoalsMissed
+                case "3fgMade":
+                sum += selectedStatLine.threeFieldGoalsMade
+                case "3fgMiss":
+                sum += selectedStatLine.threeFieldGoalsMissed
             default:
                 sum = 0
             }
