@@ -250,10 +250,19 @@ class NewGameViewController: UITableViewController, DZNEmptyDataSetDelegate, DZN
         let gameNavigation = UINavigationController()
         let newGame: GamePadViewController = GamePadViewController()
         
-        newGame.currentGame = Factory.createGame(team1: self.tableSections[0], team2: self.tableSections[1])
-        
-        gameNavigation.viewControllers = [newGame]
-        navigationController?.presentViewController(gameNavigation, animated: true, completion: nil)
+        if self.tableSections[0].count == 0 || self.tableSections[1].count == 0 {
+//            Create a UIAlertController
+            let zeroPlayerAlert = UIAlertController(title: "Invalid Game", message: "A team cannot have zero players.", preferredStyle: .Alert)
+            let ok = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+            zeroPlayerAlert.addAction(ok)
+            self.presentViewController(zeroPlayerAlert, animated: true, completion: nil)
+        } else {
+//            Progress only if there is nobody in either team
+            newGame.currentGame = Factory.createGame(team1: self.tableSections[0], team2: self.tableSections[1])
+            
+            gameNavigation.viewControllers = [newGame]
+            navigationController?.presentViewController(gameNavigation, animated: true, completion: nil)
+        }
     }
     
     func resetGame(sender: UIBarButtonItem) {
